@@ -1,0 +1,54 @@
+/* Full-Screen Layout */
+.contact-page {
+    display: flex;
+    justify-content: center; /* Keep centered horizontally */
+    align-items: flex-start; /* Align items higher on the screen */
+    height: 100vh; /* Full height of the viewport */
+    width: 100%; /* Full width of the viewport */
+    background: linear-gradient(135deg, #d8b4fe, #0347d9); /* Gradient background */
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    padding-top: 10vh; /* Raise content by adding padding at the top */
+  }
+  
+  /* Heading Styles */
+  .contact-page h1 {
+    font-size: 3rem; /* Larger heading */
+    color: white; /* White text for contrast */
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  /* Description Styles */
+  .contact-page p {
+    font-size: 1.5rem; /* Readable text size */
+    color: white; /* White text */
+    margin-bottom: 30px;
+  }
+  
+  /* Contact List */
+  .contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .contact-list li {
+    font-size: 1.3rem; /* Larger size for list items */
+    color: white; /* White text for contrast */
+    margin-bottom: 15px;
+  }
+  
+  /* Links */
+  .contact-list a {
+    color: #80ccff; /* Light blue links for visibility */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+  }
+  
+  .contact-list a:hover {
+    color: #ffffff; /* Change to white on hover */
+    text-decoration: underline;
+  }

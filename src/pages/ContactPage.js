@@ -1,15 +1,17 @@
 import React from 'react';
+import './ContactPage.css'; // Import the CSS for this page
 
 const ContactPage = () => {
   return (
-    <div className="contact-page" style={{ backgroundColor: 'lightblue', padding: '20px' }}>
-      <h1 style={{ color: 'purple' }}>Contact Page</h1>
-      <h2>Reach out to us through the following:</h2>
-      <ul>
-        <li>Email: contact@example.com</li>
-        <li>Instagram: @example</li>
-        <li>Telegram: @example</li>
-      </ul>
+    <div className="contact-page">
+      <div>
+        <h1>Contact Us</h1>
+        <p>We’d love to hear from you!</p>
+        <ul className="contact-list">
+          <li>Email: <a href="mailto:prod2danbeats@gmail.com">prod2danbeats@gmail.com</a></li>
+          <li>Instagram: <a href="https://www.instagram.com/prod2dan/">@prod2dan</a></li>
+        </ul>
+      </div>
     </div>
   );
 };

@@ -1,32 +1,43 @@
-import React, { useState } from 'react';
+import React from 'react';
+import BeatCard from '../components/BeatCard';
+import { browseBeats } from '../data/beats'; // Import centralized data
 
 const BrowsePage = () => {
-  const [search, setSearch] = useState('');
-
-  const handleSearchChange = (event) => {
-    setSearch(event.target.value);
-  };
-
   return (
-    <div className="browse-page" style={{ backgroundColor: 'lightblue', padding: '20px' }}>
-      <h1 style={{ color: 'purple' }}>Browse Page</h1>
-      <input
-        type="text"
-        placeholder="Search for beats by genre, mood, tempo, etc."
-        value={search}
-        onChange={handleSearchChange}
-        style={{ padding: '10px', marginBottom: '20px' }}
-      />
-      <div className="beats">
-        <h2>Beat 1</h2>
-        <p>[Beat placeholder]</p>
-        <h2>Beat 2</h2>
-        <p>[Beat placeholder]</p>
-        <h2>Beat 3</h2>
-        <p>[Beat placeholder]</p>
+    <div style={styles.container}>
+      <h1 style={styles.heading}>Browse Beats</h1>
+      <div style={styles.grid}>
+        {browseBeats.map((beat) => (
+          <BeatCard
+            key={beat.id}
+            id={beat.id}
+            title={beat.title}
+            artist={beat.artist}
+            price={beat.price}
+            audioUrl={beat.audioUrl}
+          />
+        ))}
       </div>
     </div>
   );
+};
+
+const styles = {
+  container: {
+    padding: '16px',
+    fontFamily: 'Arial, sans-serif',
+  },
+  heading: {
+    textAlign: 'center',
+    fontSize: '24px',
+    marginBottom: '16px',
+  },
+  grid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    gap: '16px',
+    justifyContent: 'center',
+  },
 };
 
 export default BrowsePage;

@@ -1,0 +1,128 @@
+/* CheckoutPage.css */
+.checkout-page {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  background: linear-gradient(to right, #3a3a5c, #5a5a85); /* Lighter gradient */
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.cart-container {
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.cart-container h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #f0f0f0;
+}
+
+.cart-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item p {
+  margin: 0;
+}
+
+.cart-item button {
+  background: #ff4d4f;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.cart-item button:hover {
+  background: #ff7875;
+}
+
+h3 {
+  text-align: right;
+  margin: 20px 0;
+  color: #fff;
+}
+
+form {
+  background: rgba(219, 194, 194, 0.1);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  color: #f0f0f0;
+}
+
+input[type="email"],
+textarea,
+.CardElement {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #444;
+  border-radius: 5px;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+input::placeholder {
+  color: #ccc;
+}
+
+button[type="submit"] {
+  background: #4caf50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease;
+  width: 100%;
+}
+
+button[type="submit"]:hover {
+  background: #45a049;
+}
+
+.message {
+  margin-top: 20px;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+}

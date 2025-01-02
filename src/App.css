@@ -36,3 +36,104 @@
     transform: rotate(360deg);
   }
 }
+.beat-card {
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.add-to-cart {
+  margin-top: 1rem;
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.add-to-cart:hover {
+  background: #444;
+}
+.browse-page {
+  padding: 2rem;
+  background-color: #f4f4f4;
+}
+
+.beat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #000;
+  padding: 1rem 2rem;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+/* Tooltip Styling */
+.tooltip {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  transform: translateY(-120%);
+  margin-top: -10px;
+}
+
+/* BeatCard Audio Hover */
+.beat-card {
+  position: relative;
+  text-align: center;
+  padding: 15px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.beat-card:hover {
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.beat-card audio {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* Checkout Form Validation */
+.error {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+button {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #555;
+}
