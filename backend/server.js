@@ -9,7 +9,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 app.use(
   cors({
-    origin: 'http://localhost:3000', // Replace with your frontend URL in production
+    origin: 'https://twodanbeatstore-frontend.onrender.com', // Replace with your frontend URL in production
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
   })
