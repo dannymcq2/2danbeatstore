@@ -1,0 +1,67 @@
+/* Responsive.css or in your PageStyles.css */
+
+/* Base styles that apply to all screen sizes */
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+    max-width: 1200px;
+}
+
+.header, .footer {
+    background-color: #f8f9fa;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav, .content, .sidebar {
+    padding: 10px;
+    text-align: center;
+}
+
+/* Responsive Layout for Tablets */
+@media (min-width: 768px) {
+    .main {
+        flex-direction: row;
+    }
+
+    .nav, .sidebar {
+        flex: 1;
+    }
+
+    .content {
+        flex: 2;
+    }
+}
+
+/* Responsive Layout for Desktops */
+@media (min-width: 1024px) {
+    .header, .footer {
+        padding: 20px 0;
+    }
+
+    .nav, .content, .sidebar {
+        padding: 20px;
+    }
+}
+
+/* Example of image responsiveness */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Additional utility classes for responsiveness */
+.full-width {
+    width: 100%;
+}
