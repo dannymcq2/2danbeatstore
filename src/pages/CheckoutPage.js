@@ -26,7 +26,7 @@ const CheckoutPage = () => {
     setLoading(true);
 
     try {
-      const { data } = await axios.post('http://localhost:5001/create-payment-intent', {
+      const { data } = await axios.post('https://twodanbeatstore-backend.onrender.com/create-payment-intent', {
         amount: Math.round(total * 100), // Stripe requires amount in cents
       });
 
