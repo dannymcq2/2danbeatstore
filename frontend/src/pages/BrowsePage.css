@@ -1,13 +1,21 @@
-/* BrowsePage.css */
+
 .browse-page {
     padding: 2rem;
     background-color: #f4f4f4;
-  }
+}
   
-  .beat-grid {
+.beat-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1.5rem;
-  }
-  
-  
+}
+
+.beat-image {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin: 0 auto 12px;
+}

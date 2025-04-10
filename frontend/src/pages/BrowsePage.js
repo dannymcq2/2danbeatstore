@@ -15,6 +15,7 @@ const BrowsePage = () => {
             artist={beat.artist}
             price={beat.price}
             audioUrl={beat.audioUrl}
+            image={beat.image}
           />
         ))}
       </div>

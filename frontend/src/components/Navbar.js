@@ -4,10 +4,8 @@ import { useCart } from '../context/CartContext';
 import './Navbar.css';
 
 const Navbar = () => {
-  const { cart, removeFromCart } = useCart(); // Access cart and removeFromCart from context
-  const [isCartOpen, setIsCartOpen] = useState(false);
-
-  console.log('Cart contents in Navbar:', cart); // Debugging log
+  const { cart, removeFromCart } = useCart();
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <nav className="navbar">
@@ -17,11 +15,17 @@ const Navbar = () => {
         <li><Link to="/checkout">Checkout</Link></li>
         <li><Link to="/contact">Contact</Link></li>
       </ul>
-      <div className="cart-container">
-        <button className="cart-button" onClick={() => setIsCartOpen(!isCartOpen)}>
+
+      <div
+        className="cart-container"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <button className="cart-button">
           🛒 Cart ({cart.length})
         </button>
-        {isCartOpen && (
+
+        {isHovered && (
           <div className="cart-dropdown">
             <h4>Your Cart</h4>
             {cart.length === 0 ? (

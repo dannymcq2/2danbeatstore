@@ -3,17 +3,22 @@ const express = require('express');
 const Stripe = require('stripe');
 const cors = require('cors');
 const axios = require('axios');
+const path = require('path');
 
 const app = express();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 app.use(
   cors({
-    origin: 'https://twodanbeatstore.onrender.com', // Replace with your frontend URL in production
+    origin: 'https://twodanbeatstore.onrender.com',
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
   })
 );
+
+// ✅ Serve image assets from public/images
+app.use('/images', express.static(path.join(__dirname, '../frontend/public/images')));
+
 app.use(express.json());
 
 // Debug Route (Optional)
@@ -34,7 +39,7 @@ app.post('/create-payment-intent', async (req, res) => {
     }
 
     const paymentIntent = await stripe.paymentIntents.create({
-      amount, // Amount in cents
+      amount,
       currency: 'usd',
       automatic_payment_methods: { enabled: true },
     });
@@ -53,14 +58,12 @@ app.post('/create-paypal-order', async (req, res) => {
   try {
     const { items, total } = req.body;
 
-    // Validate total amount based on items
     const calculatedTotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
 
     if (parseFloat(calculatedTotal) !== parseFloat(total)) {
       return res.status(400).send({ error: 'Invalid total amount' });
     }
 
-    // Get an access token from PayPal
     const auth = Buffer.from(
       `${process.env.PAYPAL_CLIENT_ID}:${process.env.PAYPAL_CLIENT_SECRET}`
     ).toString('base64');
@@ -78,7 +81,6 @@ app.post('/create-paypal-order', async (req, res) => {
 
     const accessToken = tokenResponse.data.access_token;
 
-    // Create the PayPal order
     const orderResponse = await axios.post(
       'https://api-m.sandbox.paypal.com/v2/checkout/orders',
       {
@@ -116,10 +118,8 @@ app.post('/checkout', (req, res) => {
       return res.status(400).send({ error: 'Invalid checkout data' });
     }
 
-    // Log the order for debugging (You can save this to a database)
     console.log('Order received:', { email, customerInfo, paymentMethod, items, total });
 
-    // Simulate success response
     res.status(200).json({ message: 'Order processed successfully!' });
   } catch (error) {
     console.error('Error processing checkout:', error.message);
@@ -127,7 +127,6 @@ app.post('/checkout', (req, res) => {
   }
 });
 
-// Start the server
 const PORT = process.env.PORT;
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running on ${PORT}`);
