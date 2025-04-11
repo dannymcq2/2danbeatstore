@@ -25,7 +25,7 @@ const BeatCard = ({ id, title, artist, price, audioUrl, image }) => {
       <img 
         src={image || 'https://source.unsplash.com/featured/?music'} 
         alt="" 
-        className="beat-image"
+        className="img"
       />
       <div className="content">
         <h2 className="title">{title}</h2>
