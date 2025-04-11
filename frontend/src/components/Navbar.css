@@ -120,6 +120,11 @@ nav.navbar {
   cursor: pointer;
 }
 
+.remove-x-btn:hover {
+  color: darkred;
+  transform: scale(1.1);
+}
+
 /***** Checkout Link *****/
 .checkout-link {
   display: block;
@@ -204,4 +209,74 @@ nav.navbar {
     padding: 8px 12px;
     font-size: 12px;
   }
+}
+
+.theme-toggle {
+  background: linear-gradient(to right, #0077ff, #8e44ad);
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-right: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background: linear-gradient(to right, #0055cc, #7e3cb0);
+  transform: scale(1.05);
+}
+
+.cart-theme-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+}
+
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to right, #3498db, #8e44ad);
+  transition: 0.4s;
+  border-radius: 50px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "🌙";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+  text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+  content: "☀️";
 }

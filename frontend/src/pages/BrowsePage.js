@@ -1,12 +1,13 @@
 import React from 'react';
 import BeatCard from '../components/BeatCard';
 import { browseBeats } from '../data/beats'; // Import centralized data
+import './BrowsePage.css';
 
 const BrowsePage = () => {
   return (
-    <div style={styles.container}>
-      <h1 style={styles.heading}>Browse Beats</h1>
-      <div style={styles.grid}>
+    <div className="browse-page">
+      <h1 style={{ textAlign: 'center', fontSize: '24px', marginBottom: '16px' }}>Browse Beats</h1>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px', justifyContent: 'center' }}>
         {browseBeats.map((beat) => (
           <BeatCard
             key={beat.id}
@@ -21,24 +22,6 @@ const BrowsePage = () => {
       </div>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    padding: '16px',
-    fontFamily: 'Arial, sans-serif',
-  },
-  heading: {
-    textAlign: 'center',
-    fontSize: '24px',
-    marginBottom: '16px',
-  },
-  grid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-    gap: '16px',
-    justifyContent: 'center',
-  },
 };
 
 export default BrowsePage;

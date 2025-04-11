@@ -1,23 +1,31 @@
+.app.light .home-page {
+  background: linear-gradient(to bottom right, #e0c3fc, #8ec5fc);
+}
+
+.app.dark .home-page {
+  background: linear-gradient(to bottom right, #1a1a2e, #16213e);
+}
+
 /* General Styling */
 .home-page {
   font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
-  background: linear-gradient(to bottom right, #e0c3fc, #8ec5fc); /* Light purple to teal gradient */
+  color: var(--text-color);
   min-height: 100vh;
 }
 
 /* Hero Section */
 .hero {
-  background: linear-gradient(to right, #e0c3fc, #8ec5fc); /* Unified Light purple to teal */
+  /* background-color: var(--card-color); */
   color: white;
   text-align: center;
-  padding: 80px 20px;
-  border-radius: 10px;
-  margin: 20px auto;
+  padding: 40px 20px;
+  border-radius: 0;
+  margin: 0 auto;
   width: 90%;
   max-width: 1200px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: none;
 }
 
 .hero h1 {
@@ -52,19 +60,19 @@
 
 /* Featured Beats Section */
 .featured-beats {
-  padding: 40px;
+  padding: 10px;
   text-align: center;
   width: 90%;
   max-width: 1200px;
-  margin: 20px auto;
-  background: linear-gradient(to bottom, #e0c3fc, #8ec5fc); /* Unified gradient */
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  /* background-color: var(--card-color); */
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .featured-beats h2 {
   font-size: 2.5rem;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   color: #333;
 }
 
@@ -78,7 +86,7 @@
 
 /* Beat Card Styling */
 .card {
-  background: linear-gradient(to bottom, #e0c3fc, #8ec5fc); /* Unified gradient */
+  background-color: var(--card-color);
   border: 1px solid #ddd;
   border-radius: 10px;
   padding: 20px;
@@ -118,18 +126,25 @@
 .card h2 {
   font-size: 1.5rem;
   margin-bottom: 10px;
-  color: #333;
+  color: var(--text-color);
 }
 
 .card p {
   font-size: 1rem;
-  color: #555;
+  color: var(--text-color);
 }
 
 /* Footer */
+.app.light footer {
+  background: linear-gradient(to bottom right, #e0c3fc, #8ec5fc);
+}
+
+.app.dark footer {
+  background-color: var(--card-color);
+}
+
 footer {
-  background: linear-gradient(to right, #e0c3fc, #8ec5fc); /* Unified gradient */
-  color: white;
+  color: var(--text-color);
   text-align: center;
   padding: 20px 10px;
   margin-top: 40px;
@@ -137,12 +152,12 @@ footer {
 }
 
 footer .social-links a {
-  color: white;
+  color: rgb(0, 123, 255);
   margin: 0 10px;
   text-decoration: none;
   font-size: 1.2rem;
 }
 
 footer .social-links a:hover {
-  color: #ff7f50; /* Coral color */
+  color: #8a50ff; /* Coral color */
 }

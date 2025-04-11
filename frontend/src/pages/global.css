@@ -1,15 +1,33 @@
 /* global.css */
 body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(to bottom right, #e0c3fc, #8ec5fc); /* Light purple to teal gradient */
-    min-height: 100vh;
-  }
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+  min-height: 100vh;
+}
   
   #root {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
   }
+  :root {
+    --bg-color: #f4f4f4;
+    --text-color: #111;
+    --card-color: #fff;
+  }
   
+  .app.dark {
+    --bg-color: #0f0f0f;
+    --text-color: #f1f1f1;
+    --card-color: #222222;
+  }
+  
+  body, .app {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+  }

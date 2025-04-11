@@ -1,14 +1,22 @@
-
 .browse-page {
-  padding: 2rem;
-  background-color: var(--bg-color);
+  padding: 2rem 2rem 0;
   color: var(--text-color);
+  min-height: 100vh;
 }
-  
+
+.app.light .browse-page {
+  background: linear-gradient(to bottom right, #e0c3fc, #8ec5fc);
+}
+
+.app.dark .browse-page {
+  background: linear-gradient(to bottom right, #1a1a2e, #16213e);
+}
+
 .beat-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1.5rem;
+    margin-bottom: 0;
 }
 
 .beat-image {
@@ -20,3 +28,4 @@
   border-radius: 8px;
   margin: 0 auto 12px;
 }
+

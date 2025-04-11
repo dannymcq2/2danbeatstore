@@ -1,11 +1,10 @@
-/* Full-Screen Layout */
 .contact-page {
     display: flex;
     justify-content: center; /* Keep centered horizontally */
     align-items: flex-start; /* Align items higher on the screen */
     height: 100vh; /* Full height of the viewport */
     width: 100%; /* Full width of the viewport */
-    background: linear-gradient(135deg, #d8b4fe, #0347d9); /* Gradient background */
+    background: var(--contact-bg-gradient); /* Gradient background */
     text-align: center;
     padding: 20px;
     box-sizing: border-box;
@@ -51,4 +50,12 @@
   .contact-list a:hover {
     color: #ffffff; /* Change to white on hover */
     text-decoration: underline;
+  }
+
+  .light .contact-page {
+    --contact-bg-gradient: linear-gradient(135deg, #d8b4fe, #0347d9);
+  }
+
+  .dark .contact-page {
+    --contact-bg-gradient: linear-gradient(135deg, #1a1a2e, #16213e);
   }

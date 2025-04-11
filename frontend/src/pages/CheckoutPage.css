@@ -1,56 +1,65 @@
 /* CheckoutPage.css */
+.app.light .checkout-page {
+  background: linear-gradient(to bottom right, #e0c3fc, #8ec5fc);
+  color: var(--text-color);
+}
+
+.app.dark .checkout-page {
+  background: linear-gradient(to bottom right, #3a3a5c, #5a5a85);
+  color: var(--text-color);
+}
+
 .checkout-page {
-  font-family: Arial, sans-serif;
-  padding: 20px;
-  max-width: 800px;
-  margin: 0 auto;
-  background: linear-gradient(to right, #3a3a5c, #5a5a85); /* Lighter gradient */
-  color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  min-height: calc(100vh - 80px); /* Adjust based on your navbar height */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 40px 20px;
 }
 
-h1 {
+.checkout-page h1 {
   text-align: center;
-  margin-bottom: 20px;
-  color: #fff;
+  margin: 20px 0 30px;
+  color: var(--text-color);
 }
 
-.cart-container {
-  margin-bottom: 20px;
-  background: rgba(255, 255, 255, 0.1);
+.checkout-page .cart-container {
+  background-color: var(--card-color);
   padding: 20px;
   border-radius: 8px;
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-.cart-container h2 {
+.checkout-page .cart-container h2 {
   font-size: 1.5rem;
   margin-bottom: 10px;
-  color: #f0f0f0;
+  color: var(--text-color);
 }
 
-.cart-list {
+.checkout-page .cart-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.cart-item {
+.checkout-page .cart-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
   padding: 10px;
-  background: rgba(255, 255, 255, 0.2);
+  background-color: var(--card-color);
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.cart-item p {
+.checkout-page .cart-item p {
   margin: 0;
 }
 
-.cart-item button {
+.checkout-page .cart-item button {
   background: #ff4d4f;
   color: #fff;
   border: none;
@@ -60,51 +69,51 @@ h1 {
   transition: background 0.3s ease;
 }
 
-.cart-item button:hover {
+.checkout-page .cart-item button:hover {
   background: #ff7875;
 }
 
-h3 {
+.checkout-page h3 {
   text-align: right;
   margin: 20px 0;
-  color: #fff;
+  color: var(--text-color);
 }
 
-form {
-  background: rgba(219, 194, 194, 0.1);
+.checkout-page form {
+  background-color: var(--card-color);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.form-group {
+.checkout-page .form-group {
   margin-bottom: 15px;
 }
 
-label {
+.checkout-page label {
   font-weight: bold;
   display: block;
   margin-bottom: 5px;
-  color: #f0f0f0;
+  color: var(--text-color);
 }
 
-input[type="email"],
-textarea,
-.CardElement {
+.checkout-page input[type="email"],
+.checkout-page textarea,
+.checkout-page .CardElement {
   width: 100%;
   padding: 10px;
   border: 1px solid #444;
   border-radius: 5px;
   font-size: 16px;
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  background-color: var(--card-color);
+  color: var(--text-color);
 }
 
-input::placeholder {
+.checkout-page input::placeholder {
   color: #ccc;
 }
 
-button[type="submit"] {
+.checkout-page button[type="submit"] {
   background: #4caf50;
   color: #fff;
   padding: 10px 20px;
@@ -116,13 +125,13 @@ button[type="submit"] {
   width: 100%;
 }
 
-button[type="submit"]:hover {
+.checkout-page button[type="submit"]:hover {
   background: #45a049;
 }
 
-.message {
+.checkout-page .message {
   margin-top: 20px;
-  color: #fff;
+  color: var(--text-color);
   font-weight: bold;
   text-align: center;
 }
