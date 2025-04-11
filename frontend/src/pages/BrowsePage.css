@@ -1,9 +1,8 @@
 .browse-page {
-  padding: 2rem 2rem 0;
+  padding: 1rem;
   color: var(--text-color);
   min-height: 100vh;
 }
-
 .app.light .browse-page {
   background: linear-gradient(to bottom right, #e0c3fc, #8ec5fc);
 }

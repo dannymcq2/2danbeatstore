@@ -31,3 +31,19 @@ body {
     color: var(--text-color);
     transition: all 0.3s ease;
   }
+
+  @media (max-width: 480px) {
+    .browse-page {
+      padding: 1rem 0.5rem;
+    }
+  
+    .beat-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  
+    .card {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
