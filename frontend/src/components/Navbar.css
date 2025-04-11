@@ -280,3 +280,35 @@ input:checked + .slider:before {
   transform: translateX(24px);
   content: "☀️";
 }
+
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0.5rem;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0;
+  }
+
+  .nav-brand {
+    order: -1;
+    margin-bottom: 0.5rem;
+  }
+
+  .nav-right {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .theme-toggle,
+  .cart-button {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+}
