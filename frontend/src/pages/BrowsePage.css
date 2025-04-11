@@ -1,7 +1,8 @@
 
 .browse-page {
-    padding: 2rem;
-    background-color: #f4f4f4;
+  padding: 2rem;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
   
 .beat-grid {

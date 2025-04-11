@@ -57,3 +57,56 @@ body {
     opacity: 1;
   }
 }
+
+
+.theme-toggle {
+  position: absolute;
+  top: 10px;
+  right: 30px;
+  background: linear-gradient(to right, #4a00e0, #0077ff);
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background: linear-gradient(to right, #5f00e0, #0055cc);
+}
+
+.theme-toggle::after {
+  content: '🌙';
+}
+
+.app.light .theme-toggle::after {
+  content: '🌙';
+}
+
+.app.dark .theme-toggle::after {
+  content: '☀️';
+}
+/* Default light theme */
+.app.light {
+  --bg-color: #f9f9f9;
+  --text-color: #111;
+  --card-color: #fff;
+}
+
+/* Dark theme */
+.app.dark {
+  --bg-color: #121212;
+  --text-color: #f5f5f5;
+  --card-color: #1e1e1e;
+}
+
+/* Apply them globally */
+body,
+.app {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}

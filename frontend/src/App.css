@@ -38,7 +38,8 @@
 }
 .beat-card {
   padding: 1.5rem;
-  background: #fff;
+  background-color: var(--card-color);
+  color: var(--text-color);
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
@@ -59,7 +60,8 @@
 }
 .browse-page {
   padding: 2rem;
-  background-color: #f4f4f4;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 .beat-grid {
@@ -71,7 +73,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #000;
+  background-color: var(--bg-color);
   padding: 1rem 2rem;
 }
 
@@ -82,7 +84,7 @@
 }
 
 .nav-links a {
-  color: #fff;
+  color: var(--text-color);
   text-decoration: none;
   font-size: 1.1rem;
 }
@@ -104,7 +106,8 @@
   position: relative;
   text-align: center;
   padding: 15px;
-  background: #fff;
+  background-color: var(--card-color);
+  color: var(--text-color);
   border-radius: 8px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -126,8 +129,8 @@
 }
 
 button {
-  background-color: #333;
-  color: #fff;
+  background-color: var(--card-color);
+  color: var(--text-color);
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -135,5 +138,6 @@ button {
 }
 
 button:hover {
-  background-color: #555;
+  background-color: var(--text-color);
+  color: var(--bg-color);
 }

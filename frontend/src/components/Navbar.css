@@ -1,23 +1,37 @@
-/* Navbar */
+/***** Imports *****/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+
+/***** Navbar Layout *****/
 nav.navbar {
   background: linear-gradient(to right, #222, #444);
   padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+}
+
+.nav-center {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 20px;
+  gap: 30px;
   margin: 0;
 }
 
+/***** Navigation Links *****/
 .nav-links li a {
   color: #fff;
   text-decoration: none;
   font-weight: 500;
+  font-size: 15px;
   transition: color 0.3s;
 }
 
@@ -25,16 +39,19 @@ nav.navbar {
   color: #ccc;
 }
 
-/* Cart */
+/***** Cart Button & Dropdown *****/
 .cart-container {
   position: relative;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
 }
 
 .cart-button {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(to right, #4a00e0, #0077ff);
+  background: linear-gradient(to right, #4a00e0, #0077ff) !important;
   color: white;
   font-weight: 600;
   font-size: 14px;
@@ -43,7 +60,7 @@ nav.navbar {
   border-radius: 999px;
   cursor: pointer;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .cart-button:hover {
@@ -55,19 +72,31 @@ nav.navbar {
 .cart-dropdown {
   position: absolute;
   right: 0;
-  top: 40px;
-  background-color: white;
-  color: black;
-  border-radius: 8px;
-  padding: 12px;
-  width: 220px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  z-index: 10;
+  top: 50px;
+  background-color: #ffffff;
+  color: #333;
+  border-radius: 10px;
+  padding: 14px;
+  width: 200px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  z-index: 20;
+  transition: all 0.3s ease-in-out;
 }
 
 .cart-dropdown h4 {
-  margin: 0 0 10px;
-  font-size: 16px;
+  font-size: 17px;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 6px;
+}
+
+.cart-dropdown p {
+  font-size: 15px;
+  color: #666;
+  text-align: center;
+  margin: 10px 0;
 }
 
 .cart-dropdown ul {
@@ -91,18 +120,88 @@ nav.navbar {
   cursor: pointer;
 }
 
+/***** Checkout Link *****/
 .checkout-link {
   display: block;
   text-align: center;
-  margin-top: 10px;
-  background-color: #0055ff;
+  margin-top: 12px;
+  background: linear-gradient(to right, #4a00e0, #0077ff);
   color: white;
   text-decoration: none;
-  padding: 8px 10px;
-  border-radius: 5px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-weight: 500;
   transition: background-color 0.3s;
 }
 
 .checkout-link:hover {
-  background-color: #214288;
+  background: linear-gradient(to right, #5f00e0, #0055cc);
+}
+
+/***** Brand Logo Styles *****/
+.nav-brand {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(to right, #8e2de2, #4a00e0, #0077ff);
+  padding: 5px 20px;
+  border-radius: 30px;
+  animation: float-horizontal 2s ease-in-out infinite alternate;
+  box-shadow: 0 0 15px rgba(72, 0, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-text {
+  font-family: 'Russo One', sans-serif;
+  background: linear-gradient(to right, #89f7fe, #66a6ff);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-slide 4s ease-in-out infinite;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+/***** Animations *****/
+@keyframes gradient-slide {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes float-horizontal {
+  0% {
+    transform: translate(-50%, -50%) translateX(-4px);
+  }
+  100% {
+    transform: translate(-50%, -50%) translateX(4px);
+  }
+}
+
+/***** Responsive Styling *****/
+@media (max-width: 768px) {
+  .nav-links {
+    gap: 15px;
+    font-size: 14px;
+  }
+
+  .brand-text {
+    font-size: 22px;
+  }
+
+  .cart-button {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
 }
