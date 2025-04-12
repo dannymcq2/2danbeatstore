@@ -161,3 +161,17 @@ footer .social-links a {
 footer .social-links a:hover {
   color: #8a50ff; /* Coral color */
 }
+
+@media (max-width: 600px) {
+  .beat-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    justify-items: center;
+  }
+
+  .card {
+    width: 90%;
+    max-width: 320px;
+  }
+}

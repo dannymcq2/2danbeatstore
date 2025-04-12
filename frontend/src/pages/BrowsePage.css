@@ -12,10 +12,11 @@
 }
 
 .beat-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  justify-items: center;
+  padding: 10px;
 }
 
 .beat-image {
@@ -27,4 +28,3 @@
   border-radius: 8px;
   margin: 0 auto 12px;
 }
-
