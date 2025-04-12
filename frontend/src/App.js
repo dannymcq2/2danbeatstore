@@ -7,6 +7,7 @@ import CheckoutPage from './pages/CheckoutPage';
 import ContactPage from './pages/ContactPage';
 import CartPage from './components/CartPage';
 import './pages/global.css';
+import './styles/MobileGlobal.css';
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(true);
