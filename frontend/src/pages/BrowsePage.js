@@ -7,7 +7,7 @@ const BrowsePage = () => {
   return (
     <div className="browse-page">
       <h1 style={{ textAlign: 'center', fontSize: '24px', marginBottom: '16px' }}>Browse Beats</h1>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px', justifyContent: 'center' }}>
+      <div className="beat-grid">
         {browseBeats.map((beat) => (
           <BeatCard
             key={beat.id}
