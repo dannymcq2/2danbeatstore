@@ -132,8 +132,36 @@
   }
 
   .beat-card-img {
+    width: 100%;
     height: auto;
-    max-height: 160px;
+    max-height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+}
+
+@media (max-width: 400px) {
+  .card {
+    padding: 8px;
+  }
+
+  .title {
+    font-size: 15px;
+  }
+
+  .artist,
+  .price {
+    font-size: 12px;
+  }
+
+  .addToCartButton {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  .playButton {
+    width: 40px;
+    height: 40px;
   }
 }
 
