@@ -1,8 +1,14 @@
 services:
   - type: web
+    name: web
     buildCommand: npm run build
     staticPublishPath: ./dist
     routes:
       - type: rewrite
-        source: /*
+        source: /**
         destination: /index.html
+    headers:
+      - source: /**
+        headers:
+          - key: Cache-Control
+            value: no-store
