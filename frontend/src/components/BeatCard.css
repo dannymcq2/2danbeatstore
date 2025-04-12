@@ -100,7 +100,9 @@
 @media (max-width: 600px) {
   .card {
     padding: 12px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 90vw;
+    margin: 10px auto;
     border-radius: 10px;
   }
 
@@ -124,6 +126,10 @@
     padding: 8px 12px;
     font-size: 13px;
     margin-top: 8px;
+  }
+
+  .beat-card-img {
+    height: 180px;
   }
 }
 

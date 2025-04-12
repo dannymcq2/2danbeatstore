@@ -147,7 +147,6 @@ nav.navbar {
 .nav-brand {
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
   top: 50%;
   transform: translate(-50%, -50%);
   background: linear-gradient(to right, #8e2de2, #4a00e0, #0077ff);
@@ -227,6 +226,8 @@ nav.navbar {
     transform: none;
     order: -1;
     width: fit-content;
+    max-width: 90vw;
+    overflow: hidden;
   }
 
   .nav-right {
@@ -318,4 +319,17 @@ nav.navbar {
 input:checked + .slider:before {
   transform: translateX(24px);
   content: "☀️";
+}
+
+.card-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  padding: 16px;
+  justify-items: center;
+}
+
+.card {
+  width: 100%;
+  max-width: 320px;
 }
