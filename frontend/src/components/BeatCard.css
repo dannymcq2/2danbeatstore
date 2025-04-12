@@ -126,3 +126,11 @@
     margin-top: 8px;
   }
 }
+
+.beat-card-img {
+  width: 100%;
+  height: 200px; /* adjust height to fit your design */
+  object-fit: cover;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}

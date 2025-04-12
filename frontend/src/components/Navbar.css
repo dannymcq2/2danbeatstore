@@ -153,7 +153,7 @@ nav.navbar {
   background: linear-gradient(to right, #8e2de2, #4a00e0, #0077ff);
   padding: 5px 20px;
   border-radius: 30px;
-  animation: float-horizontal 2s ease-in-out infinite;
+  animation: bounce-horizontal 3s ease-in-out infinite alternate;
   box-shadow: 0 0 15px rgba(72, 0, 255, 0.4);
   display: flex;
   align-items: center;
@@ -191,6 +191,15 @@ nav.navbar {
   }
   100% {
     transform: translate(-50%, -50%) translateX(4px);
+  }
+}
+
+@keyframes bounce-horizontal {
+  0% {
+    transform: translate(-50%, -50%) translateX(-10px);
+  }
+  100% {
+    transform: translate(-50%, -50%) translateX(10px);
   }
 }
 
