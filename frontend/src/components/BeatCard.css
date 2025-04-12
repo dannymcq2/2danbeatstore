@@ -105,22 +105,19 @@
 
 @media (max-width: 600px) {
   .card {
-    padding: 12px;
-    width: 100%;
+    padding: 10px;
     max-width: 90vw;
     margin: 10px auto;
     border-radius: 10px;
   }
 
-  .title {
-    font-size: 16px;
-    margin-bottom: 2px;
-  }
-
-  .artist,
+  .title,
   .price {
     font-size: 13px;
-    margin-bottom: 2px;
+  }
+
+  .artist {
+    font-size: 12px;
   }
 
   .playButton {
@@ -135,7 +132,7 @@
   }
 
   .beat-card-img {
-    height: 180px;
+    height: 160px;
   }
 }
 
