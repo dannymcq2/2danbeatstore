@@ -1,26 +1,38 @@
 services:
   - type: web
-    name: backend
-    env: node
+    name: twodanbeatstore-backend
+    runtime: node
+    region: oregon
+    plan: free
     buildCommand: cd backend && npm install
     startCommand: cd backend && node server.js
     envVars:
       - key: NODE_VERSION
-        value: 18
+        value: "18"
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: PAYPAL_CLIENT_ID
+        sync: false
+      - key: PAYPAL_CLIENT_SECRET
+        sync: false
 
   - type: web
-    name: frontend
+    name: twodanbeatstore
+    runtime: static
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/build
+    envVars:
+      - key: NODE_VERSION
+        value: "18"
+      - key: REACT_APP_STRIPE_PUBLISHABLE_KEY
+        sync: false
+      - key: REACT_APP_PAYPAL_CLIENT_ID
+        sync: false
     routes:
       - type: rewrite
         source: /*
         destination: /index.html
-    env:
-      - key: NODE_VERSION
-        value: 18
     headers:
-      - source: /*
-        headers:
-          - key: Cache-Control
-            value: no-store
+      - path: /*
+        name: Cache-Control
+        value: no-store
