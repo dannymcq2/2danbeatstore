@@ -1,61 +1,52 @@
 .contact-page {
-    display: flex;
-    justify-content: center; /* Keep centered horizontally */
-    align-items: flex-start; /* Align items higher on the screen */
-    height: 100vh; /* Full height of the viewport */
-    width: 100%; /* Full width of the viewport */
-    background: var(--contact-bg-gradient); /* Gradient background */
-    text-align: center;
-    padding: 20px;
-    box-sizing: border-box;
-    padding-top: 10vh; /* Raise content by adding padding at the top */
-  }
-  
-  /* Heading Styles */
-  .contact-page h1 {
-    font-size: 3rem; /* Larger heading */
-    color: white; /* White text for contrast */
-    margin-bottom: 20px;
-    font-weight: bold;
-  }
-  
-  /* Description Styles */
-  .contact-page p {
-    font-size: 1.5rem; /* Readable text size */
-    color: white; /* White text */
-    margin-bottom: 30px;
-  }
-  
-  /* Contact List */
-  .contact-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .contact-list li {
-    font-size: 1.3rem; /* Larger size for list items */
-    color: white; /* White text for contrast */
-    margin-bottom: 15px;
-  }
-  
-  /* Links */
-  .contact-list a {
-    color: #80ccff; /* Light blue links for visibility */
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease, text-decoration 0.3s ease;
-  }
-  
-  .contact-list a:hover {
-    color: #ffffff; /* Change to white on hover */
-    text-decoration: underline;
-  }
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+}
 
-  .light .contact-page {
-    --contact-bg-gradient: linear-gradient(135deg, #d8b4fe, #0347d9);
-  }
+.contact-page > div {
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+}
 
-  .dark .contact-page {
-    --contact-bg-gradient: linear-gradient(135deg, #1a1a2e, #16213e);
-  }
+.contact-page h1 {
+  margin: 0 0 12px;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--text-color);
+}
+
+.contact-page > div > p {
+  margin: 0 0 32px;
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-list li {
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+}
+
+.contact-list a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.contact-list a:hover {
+  color: var(--text-muted);
+}
