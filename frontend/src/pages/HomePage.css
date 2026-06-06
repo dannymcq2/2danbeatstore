@@ -134,34 +134,6 @@
   color: var(--text-color);
 }
 
-/* Footer */
-.app.light footer {
-  background: linear-gradient(to bottom right, #e0c3fc, #8ec5fc);
-}
-
-.app.dark footer {
-  background-color: var(--card-color);
-}
-
-footer {
-  color: var(--text-color);
-  text-align: center;
-  padding: 20px 10px;
-  margin-top: 40px;
-  border-radius: 10px;
-}
-
-footer .social-links a {
-  color: rgb(0, 123, 255);
-  margin: 0 10px;
-  text-decoration: none;
-  font-size: 1.2rem;
-}
-
-footer .social-links a:hover {
-  color: #8a50ff; /* Coral color */
-}
-
 @media (max-width: 600px) {
   .beat-list {
     display: grid;

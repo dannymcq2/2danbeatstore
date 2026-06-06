@@ -1,12 +1,12 @@
 import React from 'react';
 import BeatCard from '../components/BeatCard';
-import { browseBeats } from '../data/beats'; // Import centralized data
+import { browseBeats } from '../data/beats';
 import './BrowsePage.css';
 
 const BrowsePage = () => {
   return (
     <div className="browse-page">
-      <h1 style={{ textAlign: 'center', fontSize: '24px', marginBottom: '16px' }}>Browse Beats</h1>
+      <h1 className="browse-title">Browse Beats</h1>
       <div className="beat-grid">
         {browseBeats.map((beat) => (
           <BeatCard

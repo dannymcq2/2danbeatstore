@@ -2,8 +2,9 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { pageVariants, pageTransition } from '../animations';
 import BeatCard from '../components/BeatCard';
+import Footer from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
-import { featuredBeats } from '../data/beats'; // Import centralized data
+import { featuredBeats } from '../data/beats';
 import './HomePage.css';
 
 const HomePage = () => {
@@ -43,15 +44,7 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer>
-        <p>&copy; 2024 Dan's Beat Store. All Rights Reserved.</p>
-        <div className="social-links">
-          <a href="https://www.instagram.com/prod2dan/">Instagram</a>
-          <a href="https://x.com/prodx2Dan">Twitter/X</a>
-          <a href="https://www.youtube.com/@prod2Dan">YouTube</a>
-        </div>
-      </footer>
+      <Footer />
     </motion.div>
   );
 };
