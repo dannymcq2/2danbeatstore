@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAudioPlayer } from '../context/AudioPlayerContext';
 import './BeatCard.css';
@@ -41,15 +42,18 @@ const BeatCard = ({ id, title, artist, price, audioUrl, image }) => {
 
       <div className="beat-card-body">
         <div className="beat-card-info">
-          <h3 className="beat-card-title">{title}</h3>
+          <Link to={`/beats/${id}`} className="beat-card-title">{title}</Link>
           <p className="beat-card-artist">{artist}</p>
         </div>
         <p className="beat-card-price">${price}</p>
       </div>
 
-      <button className="add-to-cart-button" onClick={handleAddToCart}>
-        Add to Cart
-      </button>
+      <div className="beat-card-actions">
+        <Link to={`/beats/${id}`} className="beat-card-view-btn">View</Link>
+        <button className="add-to-cart-button" onClick={handleAddToCart}>
+          Add to Cart
+        </button>
+      </div>
 
       <audio ref={audioRef} src={audioUrl} />
     </article>
