@@ -1,20 +1,22 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
+import { useAudioPlayer } from '../context/AudioPlayerContext';
 import './BeatCard.css';
 
 const BeatCard = ({ id, title, artist, price, audioUrl, image }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
   const { addToCart } = useCart();
+  const { playingId, toggleBeat, handleEnded } = useAudioPlayer();
+  const isPlaying = playingId === id;
 
-  const togglePlay = () => {
-    if (isPlaying) {
-      audioRef.current.pause();
-    } else {
-      audioRef.current.play();
-    }
-    setIsPlaying(!isPlaying);
-  };
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return undefined;
+
+    const onEnded = () => handleEnded(id);
+    audio.addEventListener('ended', onEnded);
+    return () => audio.removeEventListener('ended', onEnded);
+  }, [id, handleEnded]);
 
   const handleAddToCart = () => {
     addToCart({ id, title, artist, price, audioUrl });
@@ -30,7 +32,7 @@ const BeatCard = ({ id, title, artist, price, audioUrl, image }) => {
         />
         <button
           className="play-button"
-          onClick={togglePlay}
+          onClick={() => toggleBeat(id, audioRef.current)}
           aria-label={isPlaying ? `Pause ${title}` : `Play ${title}`}
         >
           <span className={isPlaying ? 'pause-icon' : 'play-icon'} />
