@@ -22,10 +22,10 @@ const Navbar = ({ toggleTheme, darkMode }) => {
         </div>
 
         <div className="cart-theme-wrapper">
-        <label className="theme-switch">
-  <input type="checkbox" onChange={toggleTheme} checked={darkMode} />
-  <span className="slider"></span>
-</label>
+          <label className="theme-switch">
+            <input type="checkbox" onChange={toggleTheme} checked={darkMode} />
+            <span className="slider"></span>
+          </label>
 
           <div className="cart-container">
             <button

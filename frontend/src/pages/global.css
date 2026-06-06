@@ -1,4 +1,15 @@
-/* global.css */
+:root {
+  --bg-color: #f4f4f4;
+  --text-color: #111;
+  --card-color: #fff;
+}
+
+.app.dark {
+  --bg-color: #0f0f0f;
+  --text-color: #f1f1f1;
+  --card-color: #222222;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -8,42 +19,32 @@ body {
   transition: all 0.3s ease;
   min-height: 100vh;
 }
-  
-  #root {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-  :root {
-    --bg-color: #f4f4f4;
-    --text-color: #111;
-    --card-color: #fff;
-  }
-  
-  .app.dark {
-    --bg-color: #0f0f0f;
-    --text-color: #f1f1f1;
-    --card-color: #222222;
-  }
-  
-  body, .app {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    transition: all 0.3s ease;
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+body,
+.app {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 480px) {
+  .browse-page {
+    padding: 1rem 0.5rem;
   }
 
-  @media (max-width: 480px) {
-    .browse-page {
-      padding: 1rem 0.5rem;
-    }
-  
-    .beat-grid {
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-  
-    .card {
-      width: 100%;
-      max-width: 100%;
-    }
+  .beat-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
+
+  .card {
+    width: 100%;
+    max-width: 100%;
+  }
+}

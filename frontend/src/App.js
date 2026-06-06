@@ -17,7 +17,7 @@ const App = () => {
   return (
     <div className={darkMode ? 'app dark' : 'app light'}>
       <Router>
-      <Navbar toggleTheme={toggleTheme} darkMode={darkMode} />
+        <Navbar toggleTheme={toggleTheme} darkMode={darkMode} />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/browse" element={<BrowsePage />} />

@@ -22,11 +22,10 @@ const BeatCard = ({ id, title, artist, price, audioUrl, image }) => {
 
   return (
     <div className="card">
-      <img 
-        src={image || 'https://source.unsplash.com/featured/?music'} 
-        alt={title} 
+      <img
+        src={image || 'https://source.unsplash.com/featured/?music'}
+        alt={title}
         className="beat-card-img"
-        style={{ width: '100%', height: 'auto', objectFit: 'cover', borderRadius: '8px' }}
       />
       <div className="content">
         <h2 className="title">{title}</h2>

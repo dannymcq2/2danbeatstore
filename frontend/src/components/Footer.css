@@ -1,24 +1,26 @@
-.footer {
-    background-color: #000;
-    color: #fff;
-    text-align: center;
-    padding: 2rem 1rem;
-    margin-top: 2rem;
-  }
-  
-  .footer-links {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    padding: 0;
-  }
-  
-  .footer-links a {
-    color: #00d1ff;
-    text-decoration: none;
-  }
-  
-  .footer-links a:hover {
-    text-decoration: underline;
-  }
+.app.light footer {
+  background: linear-gradient(to bottom right, #e0c3fc, #8ec5fc);
+}
+
+.app.dark footer {
+  background-color: var(--card-color);
+}
+
+footer {
+  color: var(--text-color);
+  text-align: center;
+  padding: 20px 10px;
+  margin-top: 40px;
+  border-radius: 10px;
+}
+
+footer .social-links a {
+  color: rgb(0, 123, 255);
+  margin: 0 10px;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+footer .social-links a:hover {
+  color: #8a50ff;
+}
