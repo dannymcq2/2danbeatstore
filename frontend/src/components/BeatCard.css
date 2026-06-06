@@ -1,170 +1,124 @@
-.card {
-  background-color: var(--card-color);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
-  padding: 16px;
-  width: 100%;
-  max-width: 320px;
-  margin: 0 auto;
-  text-align: center;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+.beat-card {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  background: var(--card-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  flex: 1;
+.beat-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
 
-.title,
-.price {
-  word-wrap: break-word;
-  text-align: center;
-}
-
-.title {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 4px;
-}
-
-.artist {
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 4px;
-}
-
-.price {
-  font-size: 16px;
-  color: #333;
-  margin-bottom: 8px;
+.beat-card-media {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--bg-color);
 }
 
 .beat-card-img {
   width: 100%;
-  height: auto;
-  max-height: 200px;
+  height: 100%;
   object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 12px;
+  display: block;
 }
 
-.playButton {
-  background-color: #ffffff;
-  border: 2px solid #000;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
+.play-button {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  border-radius: 50%;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.2s ease;
 }
 
-.playButton:hover {
-  background-color: #f0f0f0;
-  transform: scale(1.1);
+.play-button:hover {
+  transform: scale(1.05);
 }
 
-.playIcon {
+.play-icon {
   width: 0;
   height: 0;
+  margin-left: 3px;
   border-style: solid;
-  border-width: 10px 0 10px 15px;
-  border-color: transparent transparent transparent #000;
+  border-width: 7px 0 7px 11px;
+  border-color: transparent transparent transparent #111;
 }
 
-.pauseIcon {
+.pause-icon {
   display: flex;
-  gap: 4px;
+  gap: 3px;
 }
 
-.pauseIcon::before,
-.pauseIcon::after {
+.pause-icon::before,
+.pause-icon::after {
   content: '';
   display: block;
-  width: 6px;
-  height: 20px;
-  background-color: #000;
+  width: 4px;
+  height: 14px;
+  background: #111;
+  border-radius: 1px;
 }
 
-.addToCartButton {
-  background-color: #0055ff;
-  color: white;
+.beat-card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 16px 12px;
+}
+
+.beat-card-title {
+  margin: 0 0 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text-color);
+}
+
+.beat-card-artist {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.beat-card-price {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-color);
+  white-space: nowrap;
+}
+
+.add-to-cart-button {
+  margin: 0 16px 16px;
+  padding: 10px 16px;
+  background: var(--accent);
+  color: var(--bg-color);
   border: none;
-  border-radius: 5px;
-  padding: 10px 15px;
-  font-size: 14px;
-  margin-top: 10px;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background 0.2s ease;
 }
 
-.addToCartButton:hover {
-  background-color: #214288;
+.app.dark .add-to-cart-button {
+  color: #0a0a0a;
 }
 
-@media (max-width: 600px) {
-  .card {
-    padding: 10px;
-    max-width: 90vw;
-    margin: 10px auto;
-    border-radius: 10px;
-  }
-
-  .title,
-  .price {
-    font-size: 13px;
-  }
-
-  .artist {
-    font-size: 12px;
-  }
-
-  .playButton {
-    width: 45px;
-    height: 45px;
-  }
-
-  .addToCartButton {
-    padding: 8px 12px;
-    font-size: 13px;
-    margin-top: 8px;
-  }
-
-  .beat-card-img {
-    max-height: 180px;
-  }
-}
-
-@media (max-width: 400px) {
-  .card {
-    padding: 8px;
-  }
-
-  .title {
-    font-size: 15px;
-  }
-
-  .artist,
-  .price {
-    font-size: 12px;
-  }
-
-  .addToCartButton {
-    font-size: 12px;
-    padding: 6px 10px;
-  }
-
-  .playButton {
-    width: 40px;
-    height: 40px;
-  }
+.add-to-cart-button:hover {
+  background: var(--accent-hover);
 }

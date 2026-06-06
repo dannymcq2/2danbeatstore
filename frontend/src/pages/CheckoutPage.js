@@ -60,52 +60,54 @@ const CheckoutPage = () => {
   return (
     <div className="checkout-page">
       <h1>Checkout</h1>
-      <div className="cart-container">
-        <h2>Your Cart</h2>
-        {cart.length === 0 ? (
-          <p>Your cart is empty!</p>
-        ) : (
+      <div className="checkout-layout">
+        <div className="cart-container">
+          <h2>Your Cart</h2>
+          {cart.length === 0 ? (
+            <p className="message">Your cart is empty.</p>
+          ) : (
+            <>
+              <ul className="cart-list">
+                {cart.map((item) => (
+                  <li key={item.id} className="cart-item">
+                    <p>
+                      <strong>{item.title}</strong> by {item.artist} — ${item.price}
+                    </p>
+                    <button onClick={() => removeFromCart(item.id)}>Remove</button>
+                  </li>
+                ))}
+              </ul>
+              <h3>Total: ${total}</h3>
+            </>
+          )}
+        </div>
+
+        {cart.length > 0 && (
           <>
-            <ul className="cart-list">
-              {cart.map((item) => (
-                <li key={item.id} className="cart-item">
-                  <p>
-                    <strong>{item.title}</strong> by {item.artist} - ${item.price}
-                  </p>
-                  <button onClick={() => removeFromCart(item.id)}>Remove</button>
-                </li>
-              ))}
-            </ul>
-            <h3>Total: ${total}</h3>
-          </>
-        )}
-      </div>
+            <form onSubmit={handleStripePayment}>
+              <div className="form-group">
+                <label htmlFor="checkout-email">Email</label>
+                <input
+                  id="checkout-email"
+                  type="email"
+                  placeholder="you@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Card Details</label>
+                <CardElement options={{ style: { base: { fontSize: '16px' } } }} />
+              </div>
+              <button type="submit" disabled={!stripe || loading}>
+                {loading ? 'Processing...' : 'Pay with Card'}
+              </button>
+            </form>
 
-      {cart.length > 0 && (
-        <>
-          <form onSubmit={handleStripePayment}>
-            <div className="form-group">
-              <label>Email</label>
-              <input
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label>Card Details</label>
-              <CardElement options={{ style: { base: { fontSize: '18px' } } }} />
-            </div>
-            <button type="submit" disabled={!stripe || loading}>
-              {loading ? 'Processing...' : 'Pay Now with Card'}
-            </button>
-          </form>
-
-          <div style={{ marginTop: '20px' }}>
-            <h3>Or Pay with PayPal</h3>
-            <PayPalButtons
+            <div className="paypal-section">
+              <h3>Or pay with PayPal</h3>
+              <PayPalButtons
               style={{ layout: 'vertical' }}
               createOrder={(data, actions) => {
                 setLoading(true);
@@ -134,12 +136,13 @@ const CheckoutPage = () => {
                 setMessage('PayPal payment failed. Please try again.');
                 console.error('PayPal Error:', err);
               }}
-            />
-          </div>
-        </>
-      )}
+              />
+            </div>
+          </>
+        )}
 
-      {message && <p className="message">{message}</p>}
+        {message && <p className="message">{message}</p>}
+      </div>
     </div>
   );
 };

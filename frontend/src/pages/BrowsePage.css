@@ -1,36 +1,43 @@
 .browse-page {
-  padding: 1rem;
-  color: var(--text-color);
   min-height: 100vh;
+  padding: 48px 0 64px;
 }
 
-.browse-title {
-  text-align: center;
-  font-size: 24px;
-  margin-bottom: 16px;
-}
-.app.light .browse-page {
-  background: linear-gradient(to bottom right, #e0c3fc, #8ec5fc);
+.browse-header {
+  margin-bottom: 40px;
 }
 
-.app.dark .browse-page {
-  background: linear-gradient(to bottom right, #1a1a2e, #16213e);
+.browse-header h1 {
+  margin: 0 0 8px;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--text-color);
+}
+
+.browse-header p {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--text-muted);
 }
 
 .beat-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  justify-items: center;
-  padding: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
 }
 
-.beat-image {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin: 0 auto 12px;
+@media (max-width: 768px) {
+  .browse-page {
+    padding: 32px 0 48px;
+  }
+
+  .browse-header {
+    margin-bottom: 28px;
+  }
+
+  .beat-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 }

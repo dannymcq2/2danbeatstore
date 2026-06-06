@@ -1,149 +1,59 @@
-.app.light .home-page {
-  background: linear-gradient(to bottom right, #e0c3fc, #8ec5fc);
-}
-
-.app.dark .home-page {
-  background: linear-gradient(to bottom right, #1a1a2e, #16213e);
-}
-
-/* General Styling */
 .home-page {
-  font-family: 'Arial', sans-serif;
-  margin: 0;
-  padding: 0;
-  color: var(--text-color);
   min-height: 100vh;
+  padding-bottom: 48px;
 }
 
-/* Hero Section */
 .hero {
-  /* background-color: var(--card-color); */
-  color: white;
   text-align: center;
-  padding: 40px 20px;
-  border-radius: 0;
-  margin: 0 auto;
-  width: 90%;
-  max-width: 1200px;
-  box-shadow: none;
+  padding: 80px 24px 64px;
+}
+
+.hero-eyebrow {
+  margin: 0 0 16px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
 }
 
 .hero h1 {
-  font-size: 3rem;
-  margin-bottom: 20px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Subtle text shadow */
+  margin: 0 0 16px;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  color: var(--text-color);
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.hero p {
-  font-size: 1.2rem;
-  margin-bottom: 30px;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* Subtle text shadow */
+.hero-subtitle {
+  margin: 0 auto 32px;
+  max-width: 480px;
+  font-size: 1.0625rem;
+  color: var(--text-muted);
+  line-height: 1.6;
 }
 
-.cta-button {
-  background: linear-gradient(to right, #8e44ad, #3498db); /* Purple to blue gradient */
-  color: white;
-  padding: 14px 28px;
-  font-size: 18px;
-  font-weight: bold;
-  border: none;
-  border-radius: 25px; /* Rounded button */
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-.cta-button:hover {
-  background: linear-gradient(to right, #9b59b6, #2980b9); /* Darker purple to blue on hover */
-  transform: scale(1.05); /* Slightly larger on hover */
-}
-
-/* Featured Beats Section */
 .featured-beats {
-  padding: 10px;
-  text-align: center;
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
-  /* background-color: var(--card-color); */
-  border-radius: 0;
-  box-shadow: none;
+  padding-bottom: 48px;
 }
 
-.featured-beats h2 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-  color: #333;
+.beat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
 }
 
-/* Beat List */
-.beat-list {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-/* Beat Card Styling */
-.card {
-  background-color: var(--card-color);
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 20px;
-  text-align: center;
-  width: 200px;
-  box-shadow: 0px 4px 6px rgba(234, 0, 255, 0.568);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
-}
-
-/* Play Button Styling */
-.card .playButton {
-  background: linear-gradient(to right, #8e24aa, #0288d1); /* New gradient color (Purple to Teal) */
-  color: white; /* Icon color */
-  border: none;
-  border-radius: 50%; /* Makes it circular */
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Optional shadow */
-}
-
-.card .playButton:hover {
-  background: linear-gradient(to right, #7b1fa2, #0277bd); /* Darker gradient for hover effect */
-  transform: scale(1.1); /* Slightly enlarge on hover */
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Add a stronger shadow on hover */
-}
-
-.card h2 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-  color: var(--text-color);
-}
-
-.card p {
-  font-size: 1rem;
-  color: var(--text-color);
-}
-
-@media (max-width: 600px) {
-  .beat-list {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-    justify-items: center;
+@media (max-width: 768px) {
+  .hero {
+    padding: 48px 16px 40px;
   }
 
-  .card {
-    width: 90%;
-    max-width: 320px;
+  .beat-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 }

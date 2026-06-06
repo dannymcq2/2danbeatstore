@@ -18,6 +18,7 @@ const App = () => {
     <div className={darkMode ? 'app dark' : 'app light'}>
       <Router>
         <Navbar toggleTheme={toggleTheme} darkMode={darkMode} />
+        <main className="app-main">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/browse" element={<BrowsePage />} />
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/cart" element={<CartPage />} />
         </Routes>
+        </main>
       </Router>
     </div>
   );
