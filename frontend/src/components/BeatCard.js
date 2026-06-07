@@ -7,8 +7,8 @@ import './BeatCard.css';
 const BeatCard = ({ id, title, artist, price, audioUrl, image }) => {
   const audioRef = useRef(null);
   const { addToCart } = useCart();
-  const { playingId, toggleBeat, handleEnded } = useAudioPlayer();
-  const isPlaying = playingId === id;
+  const { toggleBeat, handleEnded, isBeatPlaying } = useAudioPlayer();
+  const isPlaying = isBeatPlaying(id);
 
   useEffect(() => {
     const audio = audioRef.current;

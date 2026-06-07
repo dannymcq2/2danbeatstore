@@ -101,6 +101,31 @@ body {
   transform: translateY(-1px);
 }
 
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  font-family: inherit;
+  color: var(--text-color);
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--card-color);
+  border-color: var(--text-muted);
+}
+
+.app.has-player .app-main {
+  padding-bottom: 72px;
+}
+
 @media (max-width: 768px) {
   .page-shell {
     padding: 0 16px;

@@ -1,0 +1,147 @@
+.content-page {
+  min-height: 100vh;
+  padding: 48px 0 80px;
+}
+
+.content-page-inner {
+  max-width: 800px;
+}
+
+.content-page-inner.wide {
+  max-width: var(--page-max);
+}
+
+.content-eyebrow {
+  margin: 0 0 12px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #a855f7;
+}
+
+.content-page h1 {
+  margin: 0 0 16px;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.content-lead {
+  margin: 0 0 40px;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.content-card {
+  padding: 24px;
+  background: var(--card-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+}
+
+.content-card h2,
+.content-card h3 {
+  margin: 0 0 12px;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.content-card p {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.text-link {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #a855f7;
+  text-decoration: none;
+}
+
+.text-link:hover {
+  text-decoration: underline;
+}
+
+.about-grid {
+  display: grid;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.about-cta {
+  text-align: center;
+}
+
+.faq-section {
+  margin-bottom: 48px;
+}
+
+.license-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.license-card .license-price {
+  margin: 0 0 12px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #a855f7;
+}
+
+.license-card ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.license-card li {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.license-card li:last-child {
+  border-bottom: none;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-item {
+  background: var(--card-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.faq-item summary {
+  padding: 18px 20px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item p {
+  margin: 0;
+  padding: 0 20px 18px;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}

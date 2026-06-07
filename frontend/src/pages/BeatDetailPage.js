@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { getBeatById, getRelatedBeats } from '../data/beats';
 import { useCart } from '../context/CartContext';
 import { useAudioPlayer } from '../context/AudioPlayerContext';
+import { usePageTitle } from '../hooks/usePageTitle';
 import BeatCard from '../components/BeatCard';
 import './BeatDetailPage.css';
 
@@ -18,13 +19,15 @@ const BeatDetailPage = () => {
   const beat = getBeatById(id);
   const audioRef = useRef(null);
   const { addToCart } = useCart();
-  const { playingId, toggleBeat, handleEnded } = useAudioPlayer();
+  const { toggleBeat, handleEnded, isBeatPlaying } = useAudioPlayer();
   const [selectedLicense, setSelectedLicense] = useState('mp3');
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
 
-  const isPlaying = playingId === beat?.id;
+  usePageTitle(beat?.title ?? 'Beat Not Found');
+
+  const isPlaying = beat ? isBeatPlaying(beat.id) : false;
   const relatedBeats = beat ? getRelatedBeats(beat) : [];
   const activeLicense = beat?.licenses?.find((l) => l.id === selectedLicense);
 

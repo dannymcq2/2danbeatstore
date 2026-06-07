@@ -12,9 +12,9 @@ const Navbar = ({ toggleTheme, darkMode }) => {
       <Link to="/" className="nav-brand">2Dan Beats</Link>
 
       <ul className="nav-links">
-        <li><Link to="/">Home</Link></li>
         <li><Link to="/browse">Browse</Link></li>
-        <li><Link to="/checkout">Checkout</Link></li>
+        <li><Link to="/about">About</Link></li>
+        <li><Link to="/faq">FAQ</Link></li>
         <li><Link to="/contact">Contact</Link></li>
       </ul>
 

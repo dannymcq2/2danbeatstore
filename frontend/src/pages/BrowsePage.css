@@ -1,10 +1,10 @@
 .browse-page {
   min-height: 100vh;
-  padding: 48px 0 64px;
+  padding: 48px 0 80px;
 }
 
 .browse-header {
-  margin-bottom: 40px;
+  margin-bottom: 32px;
 }
 
 .browse-header h1 {
@@ -12,12 +12,58 @@
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   font-weight: 700;
   letter-spacing: -0.03em;
-  color: var(--text-color);
 }
 
 .browse-header p {
   margin: 0;
   font-size: 1rem;
+  color: var(--text-muted);
+}
+
+.browse-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.mood-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.mood-chip {
+  padding: 8px 16px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  font-family: inherit;
+  color: var(--text-muted);
+  background: var(--card-color);
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mood-chip:hover {
+  border-color: var(--text-muted);
+  color: var(--text-color);
+}
+
+.mood-chip.active {
+  color: #fff;
+  background: linear-gradient(135deg, #a855f7, #6366f1);
+  border-color: transparent;
+}
+
+.browse-empty {
+  text-align: center;
+  padding: 64px 0;
+}
+
+.browse-empty p {
+  margin: 0 0 20px;
   color: var(--text-muted);
 }
 
@@ -29,11 +75,7 @@
 
 @media (max-width: 768px) {
   .browse-page {
-    padding: 32px 0 48px;
-  }
-
-  .browse-header {
-    margin-bottom: 28px;
+    padding: 32px 0 64px;
   }
 
   .beat-grid {

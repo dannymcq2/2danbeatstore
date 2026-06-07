@@ -1,11 +1,10 @@
 .home-page {
-  min-height: 100vh;
-  padding-bottom: 48px;
+  min-height: 100%;
 }
 
 .hero {
   text-align: center;
-  padding: 80px 24px 64px;
+  padding: 72px 24px 56px;
 }
 
 .hero-eyebrow {
@@ -14,7 +13,7 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: #a855f7;
 }
 
 .hero h1 {
@@ -23,7 +22,6 @@
   font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 1.1;
-  color: var(--text-color);
   max-width: 720px;
   margin-left: auto;
   margin-right: auto;
@@ -35,6 +33,13 @@
   font-size: 1.0625rem;
   color: var(--text-muted);
   line-height: 1.6;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .featured-beats {

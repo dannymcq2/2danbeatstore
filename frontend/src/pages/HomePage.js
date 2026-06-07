@@ -2,13 +2,14 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { pageVariants, pageTransition } from '../animations';
 import BeatCard from '../components/BeatCard';
-import Footer from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
 import { featuredBeats } from '../data/beats';
+import { usePageTitle } from '../hooks/usePageTitle';
 import './HomePage.css';
 
 const HomePage = () => {
   const navigate = useNavigate();
+  usePageTitle(null);
 
   return (
     <motion.div
@@ -25,9 +26,14 @@ const HomePage = () => {
         <p className="hero-subtitle">
           Curated sounds for artists, creators, and producers.
         </p>
-        <button className="btn-primary" onClick={() => navigate('/browse')}>
-          Browse Beats
-        </button>
+        <div className="hero-actions">
+          <button className="btn-primary" onClick={() => navigate('/browse')}>
+            Browse Beats
+          </button>
+          <button className="btn-secondary" onClick={() => navigate('/about')}>
+            About 2Dan
+          </button>
+        </div>
       </section>
 
       <section className="featured-beats page-shell">
@@ -46,8 +52,6 @@ const HomePage = () => {
           ))}
         </div>
       </section>
-
-      <Footer />
     </motion.div>
   );
 };

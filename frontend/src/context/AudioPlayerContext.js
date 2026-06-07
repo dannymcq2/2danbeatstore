@@ -4,6 +4,7 @@ const AudioPlayerContext = createContext();
 
 export const AudioPlayerProvider = ({ children }) => {
   const [playingId, setPlayingId] = useState(null);
+  const [isPaused, setIsPaused] = useState(false);
   const activeAudioRef = useRef(null);
 
   const stopCurrent = useCallback(() => {
@@ -13,12 +14,36 @@ export const AudioPlayerProvider = ({ children }) => {
       activeAudioRef.current = null;
     }
     setPlayingId(null);
+    setIsPaused(false);
   }, []);
+
+  const pauseCurrent = useCallback(() => {
+    if (activeAudioRef.current) {
+      activeAudioRef.current.pause();
+      setIsPaused(true);
+    }
+  }, []);
+
+  const resumeCurrent = useCallback(() => {
+    if (activeAudioRef.current) {
+      activeAudioRef.current.play();
+      setIsPaused(false);
+    }
+  }, []);
+
+  const toggleCurrent = useCallback(() => {
+    if (isPaused) resumeCurrent();
+    else pauseCurrent();
+  }, [isPaused, pauseCurrent, resumeCurrent]);
 
   const toggleBeat = useCallback((id, audioElement) => {
     if (!audioElement) return;
 
     if (playingId === id) {
+      if (isPaused) {
+        resumeCurrent();
+        return;
+      }
       stopCurrent();
       return;
     }
@@ -31,7 +56,8 @@ export const AudioPlayerProvider = ({ children }) => {
     activeAudioRef.current = audioElement;
     audioElement.play();
     setPlayingId(id);
-  }, [playingId, stopCurrent]);
+    setIsPaused(false);
+  }, [playingId, isPaused, stopCurrent, resumeCurrent]);
 
   const handleEnded = useCallback((id) => {
     if (playingId === id) {
@@ -39,8 +65,23 @@ export const AudioPlayerProvider = ({ children }) => {
     }
   }, [playingId, stopCurrent]);
 
+  const isBeatPlaying = useCallback(
+    (id) => playingId === id && !isPaused,
+    [playingId, isPaused]
+  );
+
   return (
-    <AudioPlayerContext.Provider value={{ playingId, toggleBeat, handleEnded }}>
+    <AudioPlayerContext.Provider
+      value={{
+        playingId,
+        isPaused,
+        toggleBeat,
+        toggleCurrent,
+        stopCurrent,
+        handleEnded,
+        isBeatPlaying,
+      }}
+    >
       {children}
     </AudioPlayerContext.Provider>
   );
