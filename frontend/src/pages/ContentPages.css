@@ -145,3 +145,8 @@
   line-height: 1.6;
   color: var(--text-muted);
 }
+
+.not-found-page {
+  text-align: center;
+  padding: 80px 0;
+}

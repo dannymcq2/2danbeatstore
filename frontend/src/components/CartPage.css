@@ -13,8 +13,12 @@
   text-align: center;
 }
 
-.cart-page > p {
+.cart-empty {
   text-align: center;
+}
+
+.cart-empty p {
+  margin: 0 0 20px;
   color: var(--text-muted);
 }
 

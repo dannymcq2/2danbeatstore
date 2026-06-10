@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 import axios from 'axios';
+import { BASE_URL } from '../config';
+import { usePageTitle } from '../hooks/usePageTitle';
 import './CheckoutPage.css';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 const CheckoutPage = () => {
+  usePageTitle('Checkout');
   const { cart, removeFromCart } = useCart();
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
@@ -16,18 +20,18 @@ const CheckoutPage = () => {
   const stripe = useStripe();
   const elements = useElements();
 
-  const total = cart.reduce((total, item) => total + parseFloat(item.price || 0), 0).toFixed(2);
+  const total = cart.reduce((sum, item) => sum + parseFloat(item.price || 0), 0).toFixed(2);
 
   const handleStripePayment = async (e) => {
     e.preventDefault();
-
     if (!stripe || !elements) return;
 
     setLoading(true);
+    setMessage('');
 
     try {
-      const { data } = await axios.post('https://twodanbeatstore-backend.onrender.com/create-payment-intent', {
-        amount: Math.round(total * 100), // Stripe requires amount in cents
+      const { data } = await axios.post(`${BASE_URL}/create-payment-intent`, {
+        amount: Math.round(total * 100),
       });
 
       const { error, paymentIntent } = await stripe.confirmCardPayment(data.clientSecret, {
@@ -43,8 +47,7 @@ const CheckoutPage = () => {
         setMessage('Payment successful!');
         cart.forEach((item) => removeFromCart(item.id));
       }
-    } catch (err) {
-      console.error('Stripe Payment Intent Error:', err.response?.data || err.message);
+    } catch {
       setMessage('Payment failed. Please try again.');
     }
 
@@ -54,7 +57,6 @@ const CheckoutPage = () => {
   const handlePayPalSuccess = (details) => {
     setMessage(`Transaction completed by ${details.payer.name.given_name}`);
     cart.forEach((item) => removeFromCart(item.id));
-    console.log('PayPal Transaction Details:', details);
   };
 
   return (
@@ -64,7 +66,10 @@ const CheckoutPage = () => {
         <div className="cart-container">
           <h2>Your Cart</h2>
           {cart.length === 0 ? (
-            <p className="message">Your cart is empty.</p>
+            <div className="checkout-empty">
+              <p className="message">Your cart is empty.</p>
+              <Link to="/browse" className="btn-primary">Browse Beats</Link>
+            </div>
           ) : (
             <>
               <ul className="cart-list">
@@ -108,34 +113,27 @@ const CheckoutPage = () => {
             <div className="paypal-section">
               <h3>Or pay with PayPal</h3>
               <PayPalButtons
-              style={{ layout: 'vertical' }}
-              createOrder={(data, actions) => {
-                setLoading(true);
-                return actions.order.create({
-                  purchase_units: [
-                    {
-                      amount: {
-                        value: total, // Total is already formatted as a string
-                      },
-                    },
-                  ],
-                });
-              }}
-              onApprove={(data, actions) => {
-                return actions.order.capture().then((details) => {
+                style={{ layout: 'vertical' }}
+                createOrder={(data, actions) => {
+                  setLoading(true);
+                  return actions.order.create({
+                    purchase_units: [{ amount: { value: total } }],
+                  });
+                }}
+                onApprove={(data, actions) =>
+                  actions.order.capture().then((details) => {
+                    setLoading(false);
+                    handlePayPalSuccess(details);
+                  })
+                }
+                onCancel={() => {
                   setLoading(false);
-                  handlePayPalSuccess(details);
-                });
-              }}
-              onCancel={() => {
-                console.log("User canceled the PayPal transaction.");
-                setMessage("Payment canceled. You can try again.");
-              }}
-              onError={(err) => {
-                setLoading(false);
-                setMessage('PayPal payment failed. Please try again.');
-                console.error('PayPal Error:', err);
-              }}
+                  setMessage('Payment canceled. You can try again.');
+                }}
+                onError={() => {
+                  setLoading(false);
+                  setMessage('PayPal payment failed. Please try again.');
+                }}
               />
             </div>
           </>
@@ -148,7 +146,7 @@ const CheckoutPage = () => {
 };
 
 const CheckoutWrapper = () => (
-  <PayPalScriptProvider options={{ "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID, currency: "USD" }}>
+  <PayPalScriptProvider options={{ 'client-id': process.env.REACT_APP_PAYPAL_CLIENT_ID, currency: 'USD' }}>
     <Elements stripe={stripePromise}>
       <CheckoutPage />
     </Elements>

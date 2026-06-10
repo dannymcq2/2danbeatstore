@@ -140,6 +140,14 @@
   color: var(--text-muted);
 }
 
+.checkout-empty {
+  text-align: center;
+}
+
+.checkout-empty .btn-primary {
+  margin-top: 8px;
+}
+
 .checkout-page .paypal-section {
   margin-top: 0;
 }
