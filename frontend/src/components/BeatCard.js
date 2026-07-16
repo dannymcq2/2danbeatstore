@@ -24,13 +24,16 @@ const BeatCard = ({ id, title, artist, price, audioUrl, image }) => {
   };
 
   return (
-    <article className="beat-card">
+    <article className={`beat-card${isPlaying ? ' playing' : ''}`}>
       <div className="beat-card-media">
-        <img
-          src={image || 'https://source.unsplash.com/featured/?music'}
-          alt={title}
-          className="beat-card-img"
-        />
+        <Link to={`/beats/${id}`} className="beat-card-media-link" tabIndex={-1}>
+          <img
+            src={image || 'https://source.unsplash.com/featured/?music'}
+            alt={title}
+            className="beat-card-img"
+            loading="lazy"
+          />
+        </Link>
         <button
           className="play-button"
           onClick={() => toggleBeat(id, audioRef.current)}
@@ -49,7 +52,6 @@ const BeatCard = ({ id, title, artist, price, audioUrl, image }) => {
       </div>
 
       <div className="beat-card-actions">
-        <Link to={`/beats/${id}`} className="beat-card-view-btn">View</Link>
         <button className="add-to-cart-button" onClick={handleAddToCart}>
           Add to Cart
         </button>

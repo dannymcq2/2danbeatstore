@@ -4,7 +4,9 @@
   left: 0;
   right: 0;
   z-index: 90;
-  background: var(--card-color);
+  background: var(--nav-bg);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
   border-top: 1px solid var(--border-color);
   box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.08);
   padding: 12px 0;
@@ -53,7 +55,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: #a855f7;
+  color: var(--brand);
 }
 
 .now-playing-title {
@@ -67,7 +69,7 @@
 }
 
 .now-playing-title:hover {
-  color: #a855f7;
+  color: var(--brand);
 }
 
 .now-playing-artist {

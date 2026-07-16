@@ -17,7 +17,7 @@
 }
 
 .contact-card:hover {
-  border-color: #a855f7;
+  border-color: var(--brand);
   box-shadow: var(--shadow-md);
 }
 

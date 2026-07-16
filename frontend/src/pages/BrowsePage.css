@@ -49,11 +49,12 @@
 .mood-chip:hover {
   border-color: var(--text-muted);
   color: var(--text-color);
+  background: var(--surface-2);
 }
 
 .mood-chip.active {
   color: #fff;
-  background: linear-gradient(135deg, #a855f7, #6366f1);
+  background: var(--brand-gradient);
   border-color: transparent;
 }
 
@@ -79,7 +80,13 @@
   }
 
   .beat-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .beat-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
   }
 }

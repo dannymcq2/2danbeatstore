@@ -18,7 +18,7 @@ footer {
   font-size: 1.125rem;
   font-weight: 700;
   margin-bottom: 8px;
-  background: linear-gradient(135deg, #c084fc, #a855f7, #6366f1);
+  background: linear-gradient(100deg, #c084fc, var(--brand), var(--brand-2));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -64,7 +64,7 @@ footer .social-links a {
 }
 
 footer .social-links a:hover {
-  color: #a855f7;
+  color: var(--brand);
 }
 
 .footer-copy {

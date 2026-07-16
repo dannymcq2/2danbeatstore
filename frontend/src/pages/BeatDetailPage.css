@@ -72,10 +72,6 @@
   transition: transform 0.2s ease;
 }
 
-.app.dark .beat-detail-play-btn {
-  background: #fff;
-}
-
 .beat-detail-play-btn:hover {
   transform: scale(1.05);
 }
@@ -86,11 +82,7 @@
   margin-left: 3px;
   border-style: solid;
   border-width: 7px 0 7px 11px;
-  border-color: transparent transparent transparent var(--bg-color);
-}
-
-.app.dark .beat-detail-play-btn .play-icon {
-  border-left-color: #0a0a0a;
+  border-color: transparent transparent transparent var(--accent-text);
 }
 
 .beat-detail-play-btn .pause-icon {
@@ -104,13 +96,8 @@
   display: block;
   width: 4px;
   height: 14px;
-  background: var(--bg-color);
+  background: var(--accent-text);
   border-radius: 1px;
-}
-
-.app.dark .beat-detail-play-btn .pause-icon::before,
-.app.dark .beat-detail-play-btn .pause-icon::after {
-  background: #0a0a0a;
 }
 
 .beat-detail-progress-wrap {
@@ -128,7 +115,7 @@
 
 .beat-detail-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #a855f7, #6366f1);
+  background: var(--brand-gradient);
   border-radius: 999px;
   transition: width 0.1s linear;
 }
@@ -235,8 +222,8 @@
 }
 
 .beat-detail-license.selected {
-  border-color: #a855f7;
-  box-shadow: 0 0 0 1px #a855f7;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 1px var(--brand);
 }
 
 .beat-detail-license-header {

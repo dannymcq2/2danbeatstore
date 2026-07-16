@@ -112,17 +112,13 @@
   margin-top: 8px;
   padding: 12px 20px;
   background: var(--accent);
-  color: var(--bg-color);
+  color: var(--accent-text);
   border: none;
   border-radius: 999px;
   font-size: 0.9375rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: background 0.2s ease;
-}
-
-.app.dark .checkout-page button[type="submit"] {
-  color: #0a0a0a;
 }
 
 .checkout-page button[type="submit"]:hover {
