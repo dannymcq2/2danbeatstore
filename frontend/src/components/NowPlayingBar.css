@@ -45,6 +45,7 @@
 .now-playing-info {
   flex: 1;
   min-width: 0;
+  max-width: 220px;
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -77,11 +78,46 @@
   color: var(--text-muted);
 }
 
+.now-playing-progress {
+  flex: 2;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.now-playing-time {
+  font-size: 0.6875rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.now-playing-progress-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--border-color);
+  border-radius: 999px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.now-playing-progress-fill {
+  height: 100%;
+  background: var(--brand-gradient);
+  border-radius: 999px;
+  transition: width 0.1s linear;
+}
+
 .now-playing-controls {
   display: flex;
   align-items: center;
   gap: 8px;
   flex-shrink: 0;
+}
+
+.now-playing-skip {
+  color: var(--text-color);
 }
 
 .now-playing-btn {
@@ -129,4 +165,24 @@
   font-size: 1.25rem;
   line-height: 1;
   color: var(--text-muted);
+}
+
+@media (max-width: 768px) {
+  .now-playing-inner {
+    flex-wrap: wrap;
+    row-gap: 8px;
+  }
+
+  .now-playing-info {
+    max-width: none;
+  }
+
+  .now-playing-progress {
+    order: 3;
+    flex-basis: 100%;
+  }
+
+  .now-playing-skip {
+    display: none;
+  }
 }

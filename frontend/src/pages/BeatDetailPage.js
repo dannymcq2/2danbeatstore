@@ -1,57 +1,33 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { getBeatById, getRelatedBeats } from '../data/beats';
 import { useCart } from '../context/CartContext';
-import { useAudioPlayer } from '../context/AudioPlayerContext';
+import { useAudioPlayer, formatTime } from '../context/AudioPlayerContext';
 import { usePageTitle } from '../hooks/usePageTitle';
 import BeatCard from '../components/BeatCard';
 import './BeatDetailPage.css';
 
-const formatTime = (seconds) => {
-  if (!seconds || Number.isNaN(seconds)) return '0:00';
-  const mins = Math.floor(seconds / 60);
-  const secs = Math.floor(seconds % 60);
-  return `${mins}:${secs.toString().padStart(2, '0')}`;
-};
-
 const BeatDetailPage = () => {
   const { id } = useParams();
   const beat = getBeatById(id);
-  const audioRef = useRef(null);
   const { addToCart } = useCart();
-  const { toggleBeat, handleEnded, isBeatPlaying } = useAudioPlayer();
+  const {
+    playingId,
+    currentTime,
+    duration,
+    progress,
+    toggleBeat,
+    seek,
+    isBeatPlaying,
+  } = useAudioPlayer();
   const [selectedLicense, setSelectedLicense] = useState('mp3');
-  const [progress, setProgress] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [currentTime, setCurrentTime] = useState(0);
 
   usePageTitle(beat?.title ?? 'Beat Not Found');
 
   const isPlaying = beat ? isBeatPlaying(beat.id) : false;
+  const isCurrent = beat ? playingId === beat.id : false;
   const relatedBeats = beat ? getRelatedBeats(beat) : [];
   const activeLicense = beat?.licenses?.find((l) => l.id === selectedLicense);
-
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio || !beat) return undefined;
-
-    const onEnded = () => handleEnded(beat.id);
-    const onTimeUpdate = () => {
-      setCurrentTime(audio.currentTime);
-      setProgress(audio.duration ? (audio.currentTime / audio.duration) * 100 : 0);
-    };
-    const onLoadedMetadata = () => setDuration(audio.duration);
-
-    audio.addEventListener('ended', onEnded);
-    audio.addEventListener('timeupdate', onTimeUpdate);
-    audio.addEventListener('loadedmetadata', onLoadedMetadata);
-
-    return () => {
-      audio.removeEventListener('ended', onEnded);
-      audio.removeEventListener('timeupdate', onTimeUpdate);
-      audio.removeEventListener('loadedmetadata', onLoadedMetadata);
-    };
-  }, [beat, handleEnded]);
 
   if (!beat) {
     return (
@@ -66,12 +42,9 @@ const BeatDetailPage = () => {
   }
 
   const handleProgressClick = (e) => {
-    const audio = audioRef.current;
-    if (!audio || !audio.duration) return;
+    if (!isCurrent) return;
     const rect = e.currentTarget.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
-    const newTime = (clickX / rect.width) * audio.duration;
-    audio.currentTime = newTime;
+    seek((e.clientX - rect.left) / rect.width);
   };
 
   const handleAddToCart = () => {
@@ -106,7 +79,7 @@ const BeatDetailPage = () => {
             <div className="beat-detail-player">
               <button
                 className="beat-detail-play-btn"
-                onClick={() => toggleBeat(beat.id, audioRef.current)}
+                onClick={() => toggleBeat(beat.id)}
                 aria-label={isPlaying ? `Pause ${beat.title}` : `Play ${beat.title}`}
               >
                 <span className={isPlaying ? 'pause-icon' : 'play-icon'} />
@@ -117,15 +90,18 @@ const BeatDetailPage = () => {
                   className="beat-detail-progress-bar"
                   onClick={handleProgressClick}
                   role="progressbar"
-                  aria-valuenow={progress}
+                  aria-valuenow={isCurrent ? progress : 0}
                   aria-valuemin="0"
                   aria-valuemax="100"
                 >
-                  <div className="beat-detail-progress-fill" style={{ width: `${progress}%` }} />
+                  <div
+                    className="beat-detail-progress-fill"
+                    style={{ width: `${isCurrent ? progress : 0}%` }}
+                  />
                 </div>
                 <div className="beat-detail-time">
-                  <span>{formatTime(currentTime)}</span>
-                  <span>{formatTime(duration)}</span>
+                  <span>{formatTime(isCurrent ? currentTime : 0)}</span>
+                  <span>{formatTime(isCurrent ? duration : 0)}</span>
                 </div>
               </div>
             </div>
@@ -207,8 +183,6 @@ const BeatDetailPage = () => {
           </section>
         )}
       </div>
-
-      <audio ref={audioRef} src={beat.audioUrl} />
     </div>
   );
 };

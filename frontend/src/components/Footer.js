@@ -7,7 +7,7 @@ const Footer = () => (
     <div className="footer-inner page-shell">
       <div className="footer-brand">
         <span className="footer-logo">2Dan Beats</span>
-        <p>Premium instrumentals for artists and creators.</p>
+        <p>Beats for artists, creators, and producers.</p>
       </div>
       <nav className="footer-nav">
         <Link to="/browse">Browse</Link>

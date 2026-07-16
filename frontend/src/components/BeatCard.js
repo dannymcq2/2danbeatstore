@@ -1,23 +1,13 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAudioPlayer } from '../context/AudioPlayerContext';
 import './BeatCard.css';
 
 const BeatCard = ({ id, title, artist, price, audioUrl, image }) => {
-  const audioRef = useRef(null);
   const { addToCart } = useCart();
-  const { toggleBeat, handleEnded, isBeatPlaying } = useAudioPlayer();
+  const { toggleBeat, isBeatPlaying } = useAudioPlayer();
   const isPlaying = isBeatPlaying(id);
-
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return undefined;
-
-    const onEnded = () => handleEnded(id);
-    audio.addEventListener('ended', onEnded);
-    return () => audio.removeEventListener('ended', onEnded);
-  }, [id, handleEnded]);
 
   const handleAddToCart = () => {
     addToCart({ id, title, artist, price, audioUrl });
@@ -36,7 +26,7 @@ const BeatCard = ({ id, title, artist, price, audioUrl, image }) => {
         </Link>
         <button
           className="play-button"
-          onClick={() => toggleBeat(id, audioRef.current)}
+          onClick={() => toggleBeat(id)}
           aria-label={isPlaying ? `Pause ${title}` : `Play ${title}`}
         >
           <span className={isPlaying ? 'pause-icon' : 'play-icon'} />
@@ -56,8 +46,6 @@ const BeatCard = ({ id, title, artist, price, audioUrl, image }) => {
           Add to Cart
         </button>
       </div>
-
-      <audio ref={audioRef} src={audioUrl} />
     </article>
   );
 };

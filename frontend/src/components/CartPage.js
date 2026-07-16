@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
+import { useCart, PROMO_LABEL } from '../context/CartContext';
 import { usePageTitle } from '../hooks/usePageTitle';
 import './CartPage.css';
 
 const CartPage = () => {
   usePageTitle('Cart');
-  const { cart, removeFromCart } = useCart();
+  const { cart, removeFromCart, subtotal, discount, total, promoApplied } = useCart();
 
   return (
     <div className="cart-page">
@@ -28,6 +28,24 @@ const CartPage = () => {
               </li>
             ))}
           </ul>
+          <div className="cart-totals">
+            {promoApplied && (
+              <>
+                <div className="cart-totals-row">
+                  <span>Subtotal</span>
+                  <span>${subtotal.toFixed(2)}</span>
+                </div>
+                <div className="cart-totals-row cart-totals-discount">
+                  <span>{PROMO_LABEL}</span>
+                  <span>−${discount.toFixed(2)}</span>
+                </div>
+              </>
+            )}
+            <div className="cart-totals-row cart-totals-total">
+              <span>Total</span>
+              <span>${total.toFixed(2)}</span>
+            </div>
+          </div>
           <Link to="/checkout" className="checkout-link">Go to Checkout</Link>
         </>
       )}

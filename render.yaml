@@ -15,6 +15,8 @@ services:
         sync: false
       - key: PAYPAL_CLIENT_SECRET
         sync: false
+      - key: PAYPAL_ENV
+        value: sandbox
 
   - type: web
     name: twodanbeatstore

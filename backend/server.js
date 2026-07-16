@@ -8,9 +8,16 @@ const path = require('path');
 const app = express();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
+// Set PAYPAL_ENV=live in production once your PayPal app is approved;
+// anything else (or unset) uses the sandbox API.
+const PAYPAL_API_BASE =
+  process.env.PAYPAL_ENV === 'live'
+    ? 'https://api-m.paypal.com'
+    : 'https://api-m.sandbox.paypal.com';
+
 app.use(
   cors({
-    origin: 'https://twodanbeatstore.onrender.com',
+    origin: ['https://twodanbeatstore.onrender.com', /^http:\/\/localhost:\d+$/],
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
   })
@@ -28,7 +35,7 @@ app.get('/', (req, res) => {
 
 // Stripe Payment Intent Endpoint
 app.post('/create-payment-intent', async (req, res) => {
-  const { amount } = req.body;
+  const { amount, email, items } = req.body;
 
   console.log('Received amount:', amount);
   console.log('Stripe Key present:', !!process.env.STRIPE_SECRET_KEY);
@@ -42,6 +49,12 @@ app.post('/create-payment-intent', async (req, res) => {
       amount,
       currency: 'usd',
       automatic_payment_methods: { enabled: true },
+      // Shows up in the Stripe dashboard and receipt so you know what was bought
+      receipt_email: email || undefined,
+      description: Array.isArray(items)
+        ? items.map((item) => item.title).join(', ').slice(0, 500)
+        : undefined,
+      metadata: { email: email || '' },
     });
 
     res.status(200).send({
@@ -69,7 +82,7 @@ app.post('/create-paypal-order', async (req, res) => {
     ).toString('base64');
 
     const tokenResponse = await axios.post(
-      'https://api-m.sandbox.paypal.com/v1/oauth2/token',
+      `${PAYPAL_API_BASE}/v1/oauth2/token`,
       'grant_type=client_credentials',
       {
         headers: {
@@ -82,7 +95,7 @@ app.post('/create-paypal-order', async (req, res) => {
     const accessToken = tokenResponse.data.access_token;
 
     const orderResponse = await axios.post(
-      'https://api-m.sandbox.paypal.com/v2/checkout/orders',
+      `${PAYPAL_API_BASE}/v2/checkout/orders`,
       {
         intent: 'CAPTURE',
         purchase_units: [

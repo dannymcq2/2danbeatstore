@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -40,8 +40,22 @@ const AppContent = ({ darkMode, toggleTheme }) => {
 };
 
 const App = () => {
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(() => {
+    try {
+      return localStorage.getItem('2dan-theme') !== 'light';
+    } catch {
+      return true;
+    }
+  });
   const toggleTheme = () => setDarkMode(!darkMode);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('2dan-theme', darkMode ? 'dark' : 'light');
+    } catch {
+      // storage unavailable — theme just won't persist
+    }
+  }, [darkMode]);
 
   return (
     <Router>
