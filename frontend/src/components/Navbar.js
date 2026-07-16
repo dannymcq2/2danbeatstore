@@ -46,7 +46,6 @@ const Navbar = ({ toggleTheme, darkMode }) => {
 
       <ul className="nav-links">
         <li><NavLink to="/browse">Browse</NavLink></li>
-        <li><NavLink to="/about">About</NavLink></li>
         <li><NavLink to="/faq">FAQ</NavLink></li>
         <li><NavLink to="/contact">Contact</NavLink></li>
       </ul>

@@ -7,7 +7,6 @@ import HomePage from './pages/HomePage';
 import BrowsePage from './pages/BrowsePage';
 import CheckoutPage from './pages/CheckoutPage';
 import ContactPage from './pages/ContactPage';
-import AboutPage from './pages/AboutPage';
 import FaqPage from './pages/FaqPage';
 import BeatDetailPage from './pages/BeatDetailPage';
 import NotFoundPage from './pages/NotFoundPage';
@@ -27,7 +26,6 @@ const AppContent = ({ darkMode, toggleTheme }) => {
           <Route path="/" element={<HomePage />} />
           <Route path="/browse" element={<BrowsePage />} />
           <Route path="/beats/:id" element={<BeatDetailPage />} />
-          <Route path="/about" element={<AboutPage />} />
           <Route path="/faq" element={<FaqPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/contact" element={<ContactPage />} />

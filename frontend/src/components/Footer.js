@@ -11,7 +11,6 @@ const Footer = () => (
       </div>
       <nav className="footer-nav">
         <Link to="/browse">Browse</Link>
-        <Link to="/about">About</Link>
         <Link to="/faq">FAQ</Link>
         <Link to="/contact">Contact</Link>
       </nav>

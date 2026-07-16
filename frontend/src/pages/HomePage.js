@@ -23,7 +23,6 @@ const HomePage = () => {
       <section className="hero">
         <div className="hero-glow" aria-hidden="true" />
         <div className="hero-inner page-shell">
-          <p className="hero-eyebrow">Premium instrumentals</p>
           <h1>
             Find the perfect beat for your{' '}
             <span className="gradient-text">next track</span>
@@ -34,9 +33,6 @@ const HomePage = () => {
           <div className="hero-actions">
             <button className="btn-primary" onClick={() => navigate('/browse')}>
               Browse Beats
-            </button>
-            <button className="btn-secondary" onClick={() => navigate('/about')}>
-              About 2Dan
             </button>
           </div>
         </div>
