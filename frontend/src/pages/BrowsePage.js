@@ -104,15 +104,7 @@ const BrowsePage = () => {
         ) : (
           <div className="beat-grid">
             {filteredBeats.map((beat) => (
-              <BeatCard
-                key={beat.id}
-                id={beat.id}
-                title={beat.title}
-                artist={beat.artist}
-                price={beat.price}
-                audioUrl={beat.audioUrl}
-                image={beat.image}
-              />
+              <BeatCard key={beat.id} beat={beat} />
             ))}
           </div>
         )}

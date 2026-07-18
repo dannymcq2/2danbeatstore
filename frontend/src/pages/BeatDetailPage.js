@@ -169,15 +169,7 @@ const BeatDetailPage = () => {
             <h2 className="section-title">You might also like</h2>
             <div className="beat-grid">
               {relatedBeats.map((related) => (
-                <BeatCard
-                  key={related.id}
-                  id={related.id}
-                  title={related.title}
-                  artist={related.artist}
-                  price={related.price}
-                  audioUrl={related.audioUrl}
-                  image={related.image}
-                />
+                <BeatCard key={related.id} beat={related} />
               ))}
             </div>
           </section>

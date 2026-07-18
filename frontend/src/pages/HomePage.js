@@ -42,15 +42,7 @@ const HomePage = () => {
         <h2 className="section-title">Featured</h2>
         <div className="beat-grid">
           {featuredBeats.map((beat) => (
-            <BeatCard
-              key={beat.id}
-              id={beat.id}
-              title={beat.title}
-              artist={beat.artist}
-              price={beat.price}
-              audioUrl={beat.audioUrl}
-              image={beat.image}
-            />
+            <BeatCard key={beat.id} beat={beat} />
           ))}
         </div>
       </section>

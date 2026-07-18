@@ -4,10 +4,13 @@ import { useCart } from '../context/CartContext';
 import { useAudioPlayer } from '../context/AudioPlayerContext';
 import './BeatCard.css';
 
-const BeatCard = ({ id, title, artist, price, audioUrl, image }) => {
+const BeatCard = ({ beat }) => {
+  const { id, title, artist, price, audioUrl, image, bpm, key, mood, description } = beat;
   const { addToCart } = useCart();
   const { toggleBeat, isBeatPlaying } = useAudioPlayer();
   const isPlaying = isBeatPlaying(id);
+
+  const metaLine = [bpm ? `${bpm} BPM` : null, key, mood].filter(Boolean).join(' · ');
 
   const handleAddToCart = () => {
     addToCart({ id, title, artist, price, audioUrl });
@@ -24,6 +27,11 @@ const BeatCard = ({ id, title, artist, price, audioUrl, image }) => {
             loading="lazy"
           />
         </Link>
+        {description && (
+          <div className="beat-card-overlay" aria-hidden="true">
+            <p>{description}</p>
+          </div>
+        )}
         <button
           className="play-button"
           onClick={() => toggleBeat(id)}
@@ -37,6 +45,7 @@ const BeatCard = ({ id, title, artist, price, audioUrl, image }) => {
         <div className="beat-card-info">
           <Link to={`/beats/${id}`} className="beat-card-title">{title}</Link>
           <p className="beat-card-artist">{artist}</p>
+          {metaLine && <p className="beat-card-meta">{metaLine}</p>}
         </div>
         <p className="beat-card-price">${price}</p>
       </div>

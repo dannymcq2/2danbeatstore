@@ -43,6 +43,36 @@
   transform: scale(1.045);
 }
 
+.beat-card-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 28px 72px 14px 14px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.82));
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+}
+
+.beat-card:hover .beat-card-overlay,
+.beat-card:focus-within .beat-card-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.beat-card-overlay p {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: #fff;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .play-button {
   position: absolute;
   right: 12px;
@@ -124,6 +154,14 @@
   margin: 0;
   font-size: 0.8125rem;
   color: var(--text-muted);
+}
+
+.beat-card-meta {
+  margin: 3px 0 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  opacity: 0.85;
 }
 
 .beat-card-price {
