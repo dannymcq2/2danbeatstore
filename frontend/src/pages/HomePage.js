@@ -20,19 +20,21 @@ const HomePage = () => {
       exit="exit"
       transition={pageTransition}
     >
-      <section className="hero page-shell">
-        <p className="hero-eyebrow">Premium instrumentals</p>
-        <h1>Find the perfect beat for your next track</h1>
-        <p className="hero-subtitle">
-          Curated sounds for artists, creators, and producers.
-        </p>
-        <div className="hero-actions">
-          <button className="btn-primary" onClick={() => navigate('/browse')}>
-            Browse Beats
-          </button>
-          <button className="btn-secondary" onClick={() => navigate('/about')}>
-            About 2Dan
-          </button>
+      <section className="hero">
+        <div className="hero-glow" aria-hidden="true" />
+        <div className="hero-inner page-shell">
+          <h1>
+            Find the perfect beat for your{' '}
+            <span className="gradient-text">next track</span>
+          </h1>
+          <p className="hero-subtitle">
+            Curated sounds for artists, creators, and producers.
+          </p>
+          <div className="hero-actions">
+            <button className="btn-primary" onClick={() => navigate('/browse')}>
+              Browse Beats
+            </button>
+          </div>
         </div>
       </section>
 
@@ -40,15 +42,7 @@ const HomePage = () => {
         <h2 className="section-title">Featured</h2>
         <div className="beat-grid">
           {featuredBeats.map((beat) => (
-            <BeatCard
-              key={beat.id}
-              id={beat.id}
-              title={beat.title}
-              artist={beat.artist}
-              price={beat.price}
-              audioUrl={beat.audioUrl}
-              image={beat.image}
-            />
+            <BeatCard key={beat.id} beat={beat} />
           ))}
         </div>
       </section>

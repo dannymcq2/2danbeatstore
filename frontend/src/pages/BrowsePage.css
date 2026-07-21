@@ -20,11 +20,63 @@
   color: var(--text-muted);
 }
 
+.promo-banner {
+  margin-bottom: 24px;
+  padding: 12px 18px;
+  font-size: 0.875rem;
+  color: var(--text-color);
+  background: var(--brand-soft);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  border-radius: var(--radius-sm);
+}
+
+.promo-banner strong {
+  color: var(--brand);
+}
+
 .browse-filters {
   display: flex;
   flex-direction: column;
   gap: 16px;
   margin-bottom: 32px;
+}
+
+.browse-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.sort-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sort-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.sort-select {
+  padding: 10px 14px;
+  font-size: 0.875rem;
+  font-family: inherit;
+  color: var(--text-color);
+  background: var(--card-color);
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.sort-select:hover,
+.sort-select:focus {
+  border-color: var(--text-muted);
 }
 
 .mood-filters {
@@ -49,11 +101,12 @@
 .mood-chip:hover {
   border-color: var(--text-muted);
   color: var(--text-color);
+  background: var(--surface-2);
 }
 
 .mood-chip.active {
   color: #fff;
-  background: linear-gradient(135deg, #a855f7, #6366f1);
+  background: var(--brand-gradient);
   border-color: transparent;
 }
 
@@ -79,7 +132,13 @@
   }
 
   .beat-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .beat-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
   }
 }

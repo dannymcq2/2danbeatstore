@@ -3,32 +3,43 @@
 }
 
 .hero {
-  text-align: center;
-  padding: 72px 24px 56px;
+  position: relative;
+  overflow: hidden;
+  padding: 88px 0 64px;
 }
 
-.hero-eyebrow {
-  margin: 0 0 16px;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #a855f7;
+.hero-inner {
+  position: relative;
+  text-align: center;
+}
+
+.hero-glow {
+  position: absolute;
+  top: -240px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 720px;
+  height: 480px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(168, 85, 247, 0.22) 0%,
+    rgba(99, 102, 241, 0.12) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
 }
 
 .hero h1 {
-  margin: 0 0 16px;
-  font-size: clamp(2rem, 5vw, 3.25rem);
+  margin: 0 auto 16px;
+  font-size: clamp(2.25rem, 5.5vw, 3.75rem);
   font-weight: 700;
-  letter-spacing: -0.04em;
-  line-height: 1.1;
-  max-width: 720px;
-  margin-left: auto;
-  margin-right: auto;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  max-width: 760px;
 }
 
 .hero-subtitle {
-  margin: 0 auto 32px;
+  margin: 0 auto 36px;
   max-width: 480px;
   font-size: 1.0625rem;
   color: var(--text-muted);
@@ -43,7 +54,7 @@
 }
 
 .featured-beats {
-  padding-bottom: 48px;
+  padding-bottom: 64px;
 }
 
 .beat-grid {
@@ -54,11 +65,17 @@
 
 @media (max-width: 768px) {
   .hero {
-    padding: 48px 16px 40px;
+    padding: 56px 0 44px;
   }
 
   .beat-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .beat-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
   }
 }

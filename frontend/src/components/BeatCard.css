@@ -5,19 +5,30 @@
   border: 1px solid var(--border-color);
   border-radius: var(--radius);
   overflow: hidden;
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
 }
 
 .beat-card:hover {
   box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  border-color: var(--text-muted);
+}
+
+.beat-card.playing {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 1px var(--brand), var(--shadow-md);
 }
 
 .beat-card-media {
   position: relative;
   aspect-ratio: 1;
   overflow: hidden;
-  background: var(--bg-color);
+  background: var(--surface-2);
+}
+
+.beat-card-media-link {
+  display: block;
+  height: 100%;
 }
 
 .beat-card-img {
@@ -25,14 +36,49 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.35s ease;
+}
+
+.beat-card:hover .beat-card-img {
+  transform: scale(1.045);
+}
+
+.beat-card-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 28px 72px 14px 14px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.82));
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+}
+
+.beat-card:hover .beat-card-overlay,
+.beat-card:focus-within .beat-card-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.beat-card-overlay p {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: #fff;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .play-button {
   position: absolute;
   right: 12px;
   bottom: 12px;
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -41,11 +87,15 @@
   border-radius: 50%;
   cursor: pointer;
   box-shadow: var(--shadow-md);
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 
 .play-button:hover {
-  transform: scale(1.05);
+  transform: scale(1.08);
+}
+
+.beat-card.playing .play-button {
+  background: var(--brand-gradient);
 }
 
 .play-icon {
@@ -72,6 +122,11 @@
   border-radius: 1px;
 }
 
+.beat-card.playing .play-button .pause-icon::before,
+.beat-card.playing .play-button .pause-icon::after {
+  background: #fff;
+}
+
 .beat-card-body {
   display: flex;
   justify-content: space-between;
@@ -92,7 +147,7 @@
 }
 
 .beat-card-title:hover {
-  color: #a855f7;
+  color: var(--brand);
 }
 
 .beat-card-artist {
@@ -101,53 +156,42 @@
   color: var(--text-muted);
 }
 
+.beat-card-meta {
+  margin: 3px 0 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  opacity: 0.85;
+}
+
 .beat-card-price {
   margin: 0;
-  font-size: 0.9375rem;
+  padding: 4px 10px;
+  font-size: 0.8125rem;
   font-weight: 600;
   color: var(--text-color);
+  background: var(--surface-2);
+  border-radius: 999px;
   white-space: nowrap;
 }
 
 .beat-card-actions {
   display: flex;
-  gap: 8px;
   margin: 0 16px 16px;
-}
-
-.beat-card-view-btn {
-  flex: 1;
-  padding: 10px 16px;
-  text-align: center;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text-color);
-  text-decoration: none;
-  border: 1px solid var(--border-color);
-  border-radius: 999px;
-  transition: border-color 0.2s ease, background 0.2s ease;
-}
-
-.beat-card-view-btn:hover {
-  background: var(--bg-color);
-  border-color: var(--text-muted);
 }
 
 .add-to-cart-button {
   flex: 1;
   padding: 10px 16px;
   background: var(--accent);
-  color: var(--bg-color);
+  color: var(--accent-text);
   border: none;
   border-radius: 999px;
+  font-family: inherit;
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: background 0.2s ease;
-}
-
-.app.dark .add-to-cart-button {
-  color: #0a0a0a;
 }
 
 .add-to-cart-button:hover {

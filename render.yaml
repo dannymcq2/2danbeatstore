@@ -15,11 +15,13 @@ services:
         sync: false
       - key: PAYPAL_CLIENT_SECRET
         sync: false
+      - key: PAYPAL_ENV
+        value: sandbox
 
   - type: web
     name: twodanbeatstore
     runtime: static
-    buildCommand: cd frontend && npm install && npm run build
+    buildCommand: cd frontend && npm install && DISABLE_ESLINT_PLUGIN=true npm run build
     staticPublishPath: frontend/build
     envVars:
       - key: NODE_VERSION

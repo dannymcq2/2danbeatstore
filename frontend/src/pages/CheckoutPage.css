@@ -77,6 +77,22 @@
   border-color: var(--text-muted);
 }
 
+.checkout-totals {
+  margin-top: 16px;
+  text-align: right;
+}
+
+.checkout-totals p {
+  margin: 2px 0;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.checkout-totals .checkout-discount {
+  color: var(--brand);
+  font-weight: 500;
+}
+
 .checkout-page h3 {
   text-align: right;
   margin: 16px 0 0;
@@ -112,17 +128,13 @@
   margin-top: 8px;
   padding: 12px 20px;
   background: var(--accent);
-  color: var(--bg-color);
+  color: var(--accent-text);
   border: none;
   border-radius: 999px;
   font-size: 0.9375rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: background 0.2s ease;
-}
-
-.app.dark .checkout-page button[type="submit"] {
-  color: #0a0a0a;
 }
 
 .checkout-page button[type="submit"]:hover {

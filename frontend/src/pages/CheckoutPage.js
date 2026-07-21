@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
+import { useCart, PROMO_LABEL } from '../context/CartContext';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
@@ -13,14 +13,14 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 const CheckoutPage = () => {
   usePageTitle('Checkout');
-  const { cart, removeFromCart } = useCart();
+  const { cart, removeFromCart, clearCart, subtotal, discount, promoApplied, total: cartTotal } = useCart();
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const stripe = useStripe();
   const elements = useElements();
 
-  const total = cart.reduce((sum, item) => sum + parseFloat(item.price || 0), 0).toFixed(2);
+  const total = cartTotal.toFixed(2);
 
   const handleStripePayment = async (e) => {
     e.preventDefault();
@@ -32,6 +32,8 @@ const CheckoutPage = () => {
     try {
       const { data } = await axios.post(`${BASE_URL}/create-payment-intent`, {
         amount: Math.round(total * 100),
+        email,
+        items: cart.map((item) => ({ title: item.title, price: item.price })),
       });
 
       const { error, paymentIntent } = await stripe.confirmCardPayment(data.clientSecret, {
@@ -45,7 +47,7 @@ const CheckoutPage = () => {
         setMessage(`Payment failed: ${error.message}`);
       } else if (paymentIntent.status === 'succeeded') {
         setMessage('Payment successful!');
-        cart.forEach((item) => removeFromCart(item.id));
+        clearCart();
       }
     } catch {
       setMessage('Payment failed. Please try again.');
@@ -56,7 +58,7 @@ const CheckoutPage = () => {
 
   const handlePayPalSuccess = (details) => {
     setMessage(`Transaction completed by ${details.payer.name.given_name}`);
-    cart.forEach((item) => removeFromCart(item.id));
+    clearCart();
   };
 
   return (
@@ -82,6 +84,12 @@ const CheckoutPage = () => {
                   </li>
                 ))}
               </ul>
+              {promoApplied && (
+                <div className="checkout-totals">
+                  <p>Subtotal: ${subtotal.toFixed(2)}</p>
+                  <p className="checkout-discount">{PROMO_LABEL}: −${discount.toFixed(2)}</p>
+                </div>
+              )}
               <h3>Total: ${total}</h3>
             </>
           )}

@@ -1,30 +1,41 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 :root {
-  --bg-color: #f8f8f8;
-  --text-color: #111111;
+  --bg-color: #fafafa;
+  --text-color: #111113;
   --text-muted: #6b7280;
   --card-color: #ffffff;
-  --border-color: #e5e7eb;
-  --accent: #111111;
-  --accent-hover: #333333;
+  --surface-2: #f4f4f5;
+  --border-color: #e7e7ea;
+  --accent: #111113;
+  --accent-hover: #2d2d31;
+  --accent-text: #ffffff;
+  --brand: #a855f7;
+  --brand-2: #6366f1;
+  --brand-gradient: linear-gradient(135deg, #a855f7, #6366f1);
+  --brand-soft: rgba(168, 85, 247, 0.12);
+  --nav-bg: rgba(255, 255, 255, 0.8);
   --page-max: 1200px;
-  --radius: 12px;
-  --radius-sm: 8px;
-  --shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.09);
+  --font-display: 'Space Grotesk', 'Inter', -apple-system, sans-serif;
 }
 
 .app.dark {
-  --bg-color: #0a0a0a;
-  --text-color: #f5f5f5;
+  --bg-color: #09090b;
+  --text-color: #f5f5f7;
   --text-muted: #9ca3af;
-  --card-color: #141414;
-  --border-color: #262626;
-  --accent: #ffffff;
-  --accent-hover: #e5e5e5;
+  --card-color: #121215;
+  --surface-2: #1a1a1f;
+  --border-color: #232329;
+  --accent: #f5f5f7;
+  --accent-hover: #d9d9de;
+  --accent-text: #0a0a0b;
+  --nav-bg: rgba(9, 9, 11, 0.72);
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.45);
 }
 
 * {
@@ -39,6 +50,11 @@ body {
   color: var(--text-color);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--brand);
+  color: #fff;
 }
 
 #root {
@@ -69,6 +85,13 @@ body {
   padding: 0 24px;
 }
 
+h1,
+h2,
+h3,
+.section-title {
+  font-family: var(--font-display);
+}
+
 .section-title {
   font-size: 1.5rem;
   font-weight: 600;
@@ -77,28 +100,39 @@ body {
   color: var(--text-color);
 }
 
+.gradient-text {
+  background: linear-gradient(100deg, #c084fc, var(--brand), var(--brand-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--brand);
+}
+
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   background: var(--accent);
-  color: var(--bg-color);
+  color: var(--accent-text);
   padding: 12px 24px;
   font-size: 0.9375rem;
-  font-weight: 500;
+  font-weight: 600;
+  font-family: inherit;
   border: none;
   border-radius: 999px;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
-}
-
-.app.dark .btn-primary {
-  color: #0a0a0a;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn-primary:hover {
   background: var(--accent-hover);
   transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
 }
 
 .btn-secondary {
@@ -114,20 +148,37 @@ body {
   border: 1px solid var(--border-color);
   border-radius: 999px;
   cursor: pointer;
+  text-decoration: none;
   transition: border-color 0.2s ease, background 0.2s ease;
 }
 
 .btn-secondary:hover {
-  background: var(--card-color);
+  background: var(--surface-2);
   border-color: var(--text-muted);
 }
 
+:is(a, button, input, summary, label):focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 .app.has-player .app-main {
-  padding-bottom: 72px;
+  padding-bottom: 88px;
 }
 
 @media (max-width: 768px) {
   .page-shell {
     padding: 0 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

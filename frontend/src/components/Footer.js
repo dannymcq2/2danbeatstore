@@ -7,11 +7,10 @@ const Footer = () => (
     <div className="footer-inner page-shell">
       <div className="footer-brand">
         <span className="footer-logo">2Dan Beats</span>
-        <p>Premium instrumentals for artists and creators.</p>
+        <p>Beats for artists, creators, and producers.</p>
       </div>
       <nav className="footer-nav">
         <Link to="/browse">Browse</Link>
-        <Link to="/about">About</Link>
         <Link to="/faq">FAQ</Link>
         <Link to="/contact">Contact</Link>
       </nav>

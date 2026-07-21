@@ -1,14 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import App from './App';
 import { CartProvider } from './context/CartContext';
 import { AudioPlayerProvider } from './context/AudioPlayerContext';
 
-ReactDOM.render(
+createRoot(document.getElementById('root')).render(
   <CartProvider>
     <AudioPlayerProvider>
       <App />
     </AudioPlayerProvider>
-  </CartProvider>,
-  document.getElementById('root')
+  </CartProvider>
 );

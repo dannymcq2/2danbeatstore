@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -7,7 +7,6 @@ import HomePage from './pages/HomePage';
 import BrowsePage from './pages/BrowsePage';
 import CheckoutPage from './pages/CheckoutPage';
 import ContactPage from './pages/ContactPage';
-import AboutPage from './pages/AboutPage';
 import FaqPage from './pages/FaqPage';
 import BeatDetailPage from './pages/BeatDetailPage';
 import NotFoundPage from './pages/NotFoundPage';
@@ -27,7 +26,6 @@ const AppContent = ({ darkMode, toggleTheme }) => {
           <Route path="/" element={<HomePage />} />
           <Route path="/browse" element={<BrowsePage />} />
           <Route path="/beats/:id" element={<BeatDetailPage />} />
-          <Route path="/about" element={<AboutPage />} />
           <Route path="/faq" element={<FaqPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/contact" element={<ContactPage />} />
@@ -42,8 +40,22 @@ const AppContent = ({ darkMode, toggleTheme }) => {
 };
 
 const App = () => {
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(() => {
+    try {
+      return localStorage.getItem('2dan-theme') !== 'light';
+    } catch {
+      return true;
+    }
+  });
   const toggleTheme = () => setDarkMode(!darkMode);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('2dan-theme', darkMode ? 'dark' : 'light');
+    } catch {
+      // storage unavailable — theme just won't persist
+    }
+  }, [darkMode]);
 
   return (
     <Router>
