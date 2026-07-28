@@ -157,10 +157,6 @@ const BeatDetailPage = () => {
             <button className="btn-primary beat-detail-add-btn" onClick={handleAddToCart}>
               Add to Cart — ${activeLicense?.price}
             </button>
-
-            <p className="beat-detail-note">
-              Payment integration coming soon. Cart preview is live.
-            </p>
           </div>
         </div>
 

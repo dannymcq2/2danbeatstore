@@ -176,6 +176,7 @@
 }
 
 .beat-card-actions {
+  position: relative;
   display: flex;
   margin: 0 16px 16px;
 }
@@ -196,4 +197,60 @@
 
 .add-to-cart-button:hover {
   background: var(--accent-hover);
+}
+
+.beat-card-license-picker {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(100% + 8px);
+  z-index: 5;
+  background: var(--card-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 6px;
+  box-shadow: var(--shadow-md);
+  animation: license-picker-in 0.15s ease;
+}
+
+@keyframes license-picker-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.beat-card-license-option {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 10px;
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.beat-card-license-option:hover {
+  background: var(--surface-2);
+}
+
+.beat-card-license-name {
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.beat-card-license-price {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-muted);
 }
