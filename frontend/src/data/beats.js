@@ -46,6 +46,8 @@ export const featuredBeats = [
     price: '12.99',
     audioUrl: 'https://audio.jukehost.co.uk/GqMYrYDrkvgtYMYcZiB1TbDiHJQv5UjC',
     image: '/images/fadedcover.png',
+    bpm: 135,
+    key: 'G min',
     mood: 'Melodic',
     tags: ['melodic', 'emotional'],
   }),
@@ -56,6 +58,8 @@ export const featuredBeats = [
     price: '12.99',
     audioUrl: 'https://audio.jukehost.co.uk/zlwgIStvlr2UQhh5VXLMI90AKVfoOB9s',
     image: '/images/mycover.png',
+    bpm: 113,
+    key: 'E min',
     mood: 'Dark',
     tags: ['dark', 'trap'],
   }),
@@ -66,17 +70,18 @@ export const featuredBeats = [
     price: '12.99',
     audioUrl: 'https://audio.jukehost.co.uk/CZ0FMCkAyI4wUA0NJfSqDS43wDf9k5hF',
     image: '/images/wedicover.png',
+    bpm: 133,
     mood: 'Energetic',
     tags: ['energetic', 'bounce'],
   }),
 ];
 
 export const browseBeats = [
-  withDefaults({ id: 4, title: 'We Got Sticks', artist: '2Dan', price: '19.99', audioUrl: 'https://audio.jukehost.co.uk/6LzGulHOSmVc6cxam0tYAFNdC36O1X8G', image: '/images/WegotCov.png', mood: 'Aggressive', tags: ['hard', 'drill'] }),
-  withDefaults({ id: 5, title: 'Check Us', artist: '2Dan', price: '14.99', audioUrl: 'https://audio.jukehost.co.uk/pFjA7xm8YGg10a7AyLTqcwMaY9KuTgTf', image: '/images/Checkuscov.png', mood: 'Bouncy', tags: ['bounce', 'club'] }),
-  withDefaults({ id: 6, title: 'Cant Go Without It', artist: '2Dan', price: '14.99', audioUrl: 'https://audio.jukehost.co.uk/48JxHX6NgvLqEUstRuGDfig4lxF3BxE3', image: '/images/cantgowicov.png', mood: 'Smooth', tags: ['r&b', 'smooth'] }),
-  withDefaults({ id: 7, title: 'Fresh', artist: '2Dan', price: '12.99', audioUrl: 'https://audio.jukehost.co.uk/JK5mI4S0Py8M8WTf3cKVstdiYxSzsJ9j', image: '/images/freshcov.png', mood: 'Upbeat', tags: ['upbeat', 'summer'] }),
-  withDefaults({ id: 8, title: 'Licks', artist: '2Dan', price: '10.99', audioUrl: 'https://audio.jukehost.co.uk/uvEj3f77CnUGbeudybgOZ1UiYiRJQHHE', image: '/images/lickscov.png', mood: 'Gritty', tags: ['gritty', 'street'] }),
+  withDefaults({ id: 4, title: 'We Got Sticks', artist: '2Dan', price: '19.99', audioUrl: 'https://audio.jukehost.co.uk/6LzGulHOSmVc6cxam0tYAFNdC36O1X8G', image: '/images/WegotCov.png', bpm: 146, key: 'G# min', mood: 'Aggressive', tags: ['hard', 'drill'] }),
+  withDefaults({ id: 5, title: 'Check Us', artist: '2Dan', price: '14.99', audioUrl: 'https://audio.jukehost.co.uk/pFjA7xm8YGg10a7AyLTqcwMaY9KuTgTf', image: '/images/Checkuscov.png', bpm: 133, key: 'G min', mood: 'Bouncy', tags: ['bounce', 'club'] }),
+  withDefaults({ id: 6, title: 'Cant Go Without It', artist: '2Dan', price: '14.99', audioUrl: 'https://audio.jukehost.co.uk/48JxHX6NgvLqEUstRuGDfig4lxF3BxE3', image: '/images/cantgowicov.png', bpm: 142, key: 'G min', mood: 'Smooth', tags: ['r&b', 'smooth'] }),
+  withDefaults({ id: 7, title: 'Fresh', artist: '2Dan', price: '12.99', audioUrl: 'https://audio.jukehost.co.uk/JK5mI4S0Py8M8WTf3cKVstdiYxSzsJ9j', image: '/images/freshcov.png', bpm: 140, key: 'E min', mood: 'Upbeat', tags: ['upbeat', 'summer'] }),
+  withDefaults({ id: 8, title: 'Licks', artist: '2Dan', price: '10.99', audioUrl: 'https://audio.jukehost.co.uk/uvEj3f77CnUGbeudybgOZ1UiYiRJQHHE', image: '/images/lickscov.png', bpm: 143, key: 'D# min', mood: 'Gritty', tags: ['gritty', 'street'] }),
 ];
 
 export const allBeats = [...featuredBeats, ...browseBeats];
