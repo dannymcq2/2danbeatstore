@@ -1,26 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 :root {
-  --bg-color: #fafafa;
-  --text-color: #111113;
-  --text-muted: #6b7280;
-  --card-color: #ffffff;
-  --surface-2: #f4f4f5;
-  --border-color: #e7e7ea;
-  --accent: #111113;
-  --accent-hover: #2d2d31;
+  /* Light mode: warm cream surfaces with purple pulling more weight */
+  --bg-color: #faf6ef;
+  --text-color: #221d27;
+  --text-muted: #75707c;
+  --card-color: #fffcf7;
+  --surface-2: #f3ede3;
+  --border-color: #e8dfd8;
+  --accent: #7c3aed;
+  --accent-hover: #6d28d9;
   --accent-text: #ffffff;
   --brand: #a855f7;
   --brand-2: #6366f1;
   --brand-gradient: linear-gradient(135deg, #a855f7, #6366f1);
   --brand-soft: rgba(168, 85, 247, 0.12);
-  --nav-bg: rgba(255, 255, 255, 0.8);
+  --nav-bg: rgba(250, 246, 239, 0.8);
   --page-max: 1200px;
   --radius: 16px;
   --radius-sm: 10px;
-  --shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.09);
+  --shadow: 0 1px 3px rgba(76, 42, 120, 0.06);
+  --shadow-md: 0 12px 32px rgba(76, 42, 120, 0.12);
   --font-display: 'Space Grotesk', 'Inter', -apple-system, sans-serif;
+  --ambient-scale: 1.3;
 }
 
 .app.dark {
