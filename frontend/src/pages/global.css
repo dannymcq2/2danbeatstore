@@ -36,6 +36,7 @@
   --nav-bg: rgba(9, 9, 11, 0.72);
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.45);
+  --ambient-scale: 2;
 }
 
 * {
@@ -68,54 +69,35 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: var(--bg-color);
   color: var(--text-color);
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: color 0.2s ease;
 }
 
+/* Carries the page background so the waves inside it aren't painted
+   over by an opaque .app background (negative z-index children render
+   below their ancestor's own background fill). */
 .ambient-bg {
   position: fixed;
   inset: 0;
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
+  background-color: var(--bg-color);
+  transition: background-color 0.2s ease;
 }
 
 .ambient-wave-band {
   position: absolute;
   left: 0;
   width: 200%;
-  height: 220px;
+  height: 18vh;
+  opacity: calc(var(--wave-opacity, 0.06) * var(--ambient-scale, 1));
 }
 
 .ambient-wave-band svg {
   display: block;
   width: 100%;
   height: 100%;
-}
-
-.ambient-wave-1 {
-  top: 4%;
-  opacity: 0.05;
-  animation: ambient-wave-drift 60s linear infinite;
-}
-
-.ambient-wave-2 {
-  top: 28%;
-  opacity: 0.06;
-  animation: ambient-wave-drift-reverse 46s linear infinite;
-}
-
-.ambient-wave-3 {
-  top: 54%;
-  opacity: 0.07;
-  animation: ambient-wave-drift 38s linear infinite;
-}
-
-.ambient-wave-4 {
-  top: 80%;
-  opacity: 0.09;
-  animation: ambient-wave-drift-reverse 30s linear infinite;
 }
 
 @keyframes ambient-wave-drift {
@@ -127,11 +109,6 @@ body {
   from { transform: translateX(-50%); }
   to { transform: translateX(0); }
 }
-
-.app.dark .ambient-wave-1 { opacity: 0.1; }
-.app.dark .ambient-wave-2 { opacity: 0.13; }
-.app.dark .ambient-wave-3 { opacity: 0.15; }
-.app.dark .ambient-wave-4 { opacity: 0.18; }
 
 .app-main {
   flex: 1;

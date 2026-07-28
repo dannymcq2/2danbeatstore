@@ -19,8 +19,8 @@ const WAVE_HEIGHT = 220;
 const WAVE_PERIOD = 360;
 const WAVE_REPEATS = 8; // 2880 / 360, so a -50% drift is an exact multiple of the period (seamless loop)
 
-// Single tiling wave shape, reused at different vertical offsets/amplitudes for the sitewide ambient background.
-const wavePath = (amplitude, baseline = WAVE_HEIGHT / 2) => {
+// Tiling wave shape: curve along the top, filled to the bottom of its band.
+const wavePath = (amplitude, baseline = 60) => {
   let d = `M0,${baseline}`;
   for (let i = 0; i < WAVE_REPEATS; i++) {
     const x0 = i * WAVE_PERIOD;
@@ -29,12 +29,16 @@ const wavePath = (amplitude, baseline = WAVE_HEIGHT / 2) => {
   return `${d} L2880,${WAVE_HEIGHT} L0,${WAVE_HEIGHT} Z`;
 };
 
-const AMBIENT_WAVES = [
-  { className: 'ambient-wave-1', amplitude: 12 },
-  { className: 'ambient-wave-2', amplitude: 20 },
-  { className: 'ambient-wave-3', amplitude: 26 },
-  { className: 'ambient-wave-4', amplitude: 16 },
-];
+// Layers tile the full viewport: each band is 18vh tall, spaced 12vh apart,
+// so every band's fill reaches under the next wave line — waves cover the
+// whole background, not just the top.
+const AMBIENT_WAVES = Array.from({ length: 9 }, (_, i) => ({
+  top: i * 12 - 4,
+  amplitude: [14, 22, 10, 26, 16, 20, 12, 24, 18][i],
+  duration: [58, 44, 66, 38, 52, 42, 62, 36, 48][i],
+  reverse: i % 2 === 1,
+  opacity: i % 2 === 0 ? 0.05 : 0.08,
+}));
 
 const AppContent = ({ darkMode, toggleTheme }) => {
   const { playingId } = useAudioPlayer();
@@ -42,8 +46,16 @@ const AppContent = ({ darkMode, toggleTheme }) => {
   return (
     <div className={`app ${darkMode ? 'dark' : 'light'}${playingId ? ' has-player' : ''}`}>
       <div className="ambient-bg" aria-hidden="true">
-        {AMBIENT_WAVES.map(({ className, amplitude }) => (
-          <div className={`ambient-wave-band ${className}`} key={className}>
+        {AMBIENT_WAVES.map(({ top, amplitude, duration, reverse, opacity }) => (
+          <div
+            className="ambient-wave-band"
+            key={top}
+            style={{
+              top: `${top}vh`,
+              '--wave-opacity': opacity,
+              animation: `${reverse ? 'ambient-wave-drift-reverse' : 'ambient-wave-drift'} ${duration}s linear infinite`,
+            }}
+          >
             <svg viewBox={`0 0 2880 ${WAVE_HEIGHT}`} preserveAspectRatio="none">
               <path fill="var(--brand)" d={wavePath(amplitude)} />
             </svg>
