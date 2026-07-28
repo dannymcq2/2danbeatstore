@@ -64,6 +64,7 @@ body {
 }
 
 .app {
+  position: relative;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -71,6 +72,66 @@ body {
   color: var(--text-color);
   transition: background-color 0.2s ease, color 0.2s ease;
 }
+
+.ambient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ambient-wave-band {
+  position: absolute;
+  left: 0;
+  width: 200%;
+  height: 220px;
+}
+
+.ambient-wave-band svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ambient-wave-1 {
+  top: 4%;
+  opacity: 0.05;
+  animation: ambient-wave-drift 60s linear infinite;
+}
+
+.ambient-wave-2 {
+  top: 28%;
+  opacity: 0.06;
+  animation: ambient-wave-drift-reverse 46s linear infinite;
+}
+
+.ambient-wave-3 {
+  top: 54%;
+  opacity: 0.07;
+  animation: ambient-wave-drift 38s linear infinite;
+}
+
+.ambient-wave-4 {
+  top: 80%;
+  opacity: 0.09;
+  animation: ambient-wave-drift-reverse 30s linear infinite;
+}
+
+@keyframes ambient-wave-drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes ambient-wave-drift-reverse {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+.app.dark .ambient-wave-1 { opacity: 0.1; }
+.app.dark .ambient-wave-2 { opacity: 0.13; }
+.app.dark .ambient-wave-3 { opacity: 0.15; }
+.app.dark .ambient-wave-4 { opacity: 0.18; }
 
 .app-main {
   flex: 1;
