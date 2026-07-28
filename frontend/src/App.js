@@ -15,30 +15,56 @@ import { useAudioPlayer } from './context/AudioPlayerContext';
 import './pages/global.css';
 import './styles/MobileGlobal.css';
 
+const WAVE_WIDTH = 2880;
 const WAVE_HEIGHT = 220;
-const WAVE_PERIOD = 360;
-const WAVE_REPEATS = 8; // 2880 / 360, so a -50% drift is an exact multiple of the period (seamless loop)
+// The drift animation shifts each 200%-wide band by -50%, i.e. exactly
+// WAVE_WIDTH / 2 viewBox units — so the curve must repeat with this period
+// for the loop to be seamless. Integer harmonics of it keep that guarantee
+// while making the crests irregular.
+const WAVE_LOOP = WAVE_WIDTH / 2;
+const WAVE_STEP = 60;
 
-// Tiling wave shape: curve along the top, filled to the bottom of its band.
-const wavePath = (amplitude, baseline = 60) => {
-  let d = `M0,${baseline}`;
-  for (let i = 0; i < WAVE_REPEATS; i++) {
-    const x0 = i * WAVE_PERIOD;
-    d += ` C${x0 + WAVE_PERIOD * 0.25},${baseline - amplitude} ${x0 + WAVE_PERIOD * 0.75},${baseline + amplitude} ${x0 + WAVE_PERIOD},${baseline}`;
+const r1 = (n) => Math.round(n * 10) / 10;
+
+// Organic tiling wave: a few sine harmonics summed with per-layer phases,
+// sampled and joined as smooth Catmull-Rom-derived cubics, filled to the
+// band bottom.
+const wavePath = ({ baseline, amp, harmonics }) => {
+  const y = (x) =>
+    baseline +
+    amp *
+      harmonics.reduce(
+        (sum, [k, a, p]) => sum + a * Math.sin((2 * Math.PI * k * x) / WAVE_LOOP + p),
+        0
+      );
+
+  let d = `M0,${r1(y(0))}`;
+  for (let x = 0; x < WAVE_WIDTH; x += WAVE_STEP) {
+    const x2 = x + WAVE_STEP;
+    const y1 = y(x);
+    const y2 = y(x2);
+    const y0 = y(x - WAVE_STEP);
+    const y3 = y(x2 + WAVE_STEP);
+    const c1y = y1 + (y2 - y0) / 6;
+    const c2y = y2 - (y3 - y1) / 6;
+    d += ` C${x + WAVE_STEP / 3},${r1(c1y)} ${x2 - WAVE_STEP / 3},${r1(c2y)} ${x2},${r1(y2)}`;
   }
-  return `${d} L2880,${WAVE_HEIGHT} L0,${WAVE_HEIGHT} Z`;
+  return `${d} L${WAVE_WIDTH},${WAVE_HEIGHT} L0,${WAVE_HEIGHT} Z`;
 };
 
-// Layers tile the full viewport: each band is 18vh tall, spaced 12vh apart,
-// so every band's fill reaches under the next wave line — waves cover the
-// whole background, not just the top.
-const AMBIENT_WAVES = Array.from({ length: 9 }, (_, i) => ({
-  top: i * 12 - 4,
-  amplitude: [14, 22, 10, 26, 16, 20, 12, 24, 18][i],
-  duration: [58, 44, 66, 38, 52, 42, 62, 36, 48][i],
-  reverse: i % 2 === 1,
-  opacity: i % 2 === 0 ? 0.05 : 0.08,
-}));
+// Layers cover the whole viewport, but spacing, height, shape, speed, and
+// opacity are all deliberately jittered so nothing lines up too neatly.
+const AMBIENT_WAVES = [
+  { top: -5, height: 20, baseline: 58, amp: 14, harmonics: [[2, 1, 0.4], [3, 0.55, 2.1], [5, 0.3, 4.6]], drift: 46, reverse: false, bob: 13, opacity: 0.05 },
+  { top: 6, height: 18, baseline: 66, amp: 18, harmonics: [[1, 1, 3.3], [4, 0.5, 0.9], [7, 0.22, 5.2]], drift: 34, reverse: true, bob: 17, opacity: 0.075 },
+  { top: 19, height: 21, baseline: 52, amp: 12, harmonics: [[2, 1, 5.8], [5, 0.45, 1.7], [3, 0.6, 3.9]], drift: 56, reverse: false, bob: 11, opacity: 0.045 },
+  { top: 28, height: 19, baseline: 70, amp: 20, harmonics: [[1, 1, 1.2], [3, 0.65, 4.4], [6, 0.28, 2.6]], drift: 30, reverse: true, bob: 19, opacity: 0.08 },
+  { top: 42, height: 17, baseline: 60, amp: 15, harmonics: [[2, 1, 2.7], [4, 0.4, 5.9], [5, 0.35, 0.6]], drift: 50, reverse: false, bob: 14, opacity: 0.06 },
+  { top: 52, height: 20, baseline: 55, amp: 17, harmonics: [[1, 1, 4.9], [5, 0.5, 2.3], [2, 0.7, 1.1]], drift: 38, reverse: true, bob: 12, opacity: 0.05 },
+  { top: 65, height: 19, baseline: 64, amp: 21, harmonics: [[2, 1, 1.8], [3, 0.5, 5.4], [7, 0.25, 3.2]], drift: 28, reverse: false, bob: 16, opacity: 0.085 },
+  { top: 76, height: 21, baseline: 57, amp: 13, harmonics: [[1, 1, 0.2], [4, 0.6, 3.5], [6, 0.3, 1.9]], drift: 52, reverse: true, bob: 10, opacity: 0.055 },
+  { top: 90, height: 20, baseline: 62, amp: 19, harmonics: [[2, 1, 3.6], [5, 0.4, 0.3], [3, 0.55, 5.7]], drift: 40, reverse: false, bob: 15, opacity: 0.07 },
+];
 
 const AppContent = ({ darkMode, toggleTheme }) => {
   const { playingId } = useAudioPlayer();
@@ -46,18 +72,20 @@ const AppContent = ({ darkMode, toggleTheme }) => {
   return (
     <div className={`app ${darkMode ? 'dark' : 'light'}${playingId ? ' has-player' : ''}`}>
       <div className="ambient-bg" aria-hidden="true">
-        {AMBIENT_WAVES.map(({ top, amplitude, duration, reverse, opacity }) => (
+        {AMBIENT_WAVES.map((wave) => (
           <div
             className="ambient-wave-band"
-            key={top}
+            key={wave.top}
             style={{
-              top: `${top}vh`,
-              '--wave-opacity': opacity,
-              animation: `${reverse ? 'ambient-wave-drift-reverse' : 'ambient-wave-drift'} ${duration}s linear infinite`,
+              top: `${wave.top}vh`,
+              height: `${wave.height}vh`,
+              '--wave-opacity': wave.opacity,
+              '--bob-duration': `${wave.bob}s`,
+              animation: `${wave.reverse ? 'ambient-wave-drift-reverse' : 'ambient-wave-drift'} ${wave.drift}s linear infinite`,
             }}
           >
-            <svg viewBox={`0 0 2880 ${WAVE_HEIGHT}`} preserveAspectRatio="none">
-              <path fill="var(--brand)" d={wavePath(amplitude)} />
+            <svg viewBox={`0 0 ${WAVE_WIDTH} ${WAVE_HEIGHT}`} preserveAspectRatio="none">
+              <path fill="var(--brand)" d={wavePath(wave)} />
             </svg>
           </div>
         ))}
