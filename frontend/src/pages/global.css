@@ -119,6 +119,21 @@ body {
   to { transform: translateY(7px); }
 }
 
+/* Extra-faint hair-like strand texture layered above the wave bands —
+   a single slow collective sway, deliberately not per-strand animated
+   so it reads as barely-there rather than busy. */
+.ambient-hairlines {
+  position: absolute;
+  inset: 0;
+  animation: ambient-hairline-sway 50s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+@keyframes ambient-hairline-sway {
+  from { transform: translateX(-1.2%) rotate(-0.2deg) scale(1.02); }
+  to { transform: translateX(1.2%) rotate(0.2deg) scale(1.02); }
+}
+
 .app-main {
   flex: 1;
   display: flex;

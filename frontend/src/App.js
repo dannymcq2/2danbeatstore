@@ -26,18 +26,16 @@ const WAVE_STEP = 60;
 
 const r1 = (n) => Math.round(n * 10) / 10;
 
-// Organic tiling wave: a few sine harmonics summed with per-layer phases,
-// sampled and joined as smooth Catmull-Rom-derived cubics, filled to the
-// band bottom.
-const wavePath = ({ baseline, amp, harmonics }) => {
-  const y = (x) =>
-    baseline +
-    amp *
-      harmonics.reduce(
-        (sum, [k, a, p]) => sum + a * Math.sin((2 * Math.PI * k * x) / WAVE_LOOP + p),
-        0
-      );
+// Deterministic pseudo-random in [0,1) — stable across renders, no Math.random.
+const hash = (seed) => {
+  const x = Math.sin(seed * 12.9898) * 43758.5453;
+  return x - Math.floor(x);
+};
 
+// Samples a y(x) function across the full wave width and joins the points
+// as smooth Catmull-Rom-derived cubics. Shared by the filled wave bands and
+// the open hairline strands below.
+const sampleSmoothPath = (y) => {
   let d = `M0,${r1(y(0))}`;
   for (let x = 0; x < WAVE_WIDTH; x += WAVE_STEP) {
     const x2 = x + WAVE_STEP;
@@ -49,8 +47,41 @@ const wavePath = ({ baseline, amp, harmonics }) => {
     const c2y = y2 - (y3 - y1) / 6;
     d += ` C${x + WAVE_STEP / 3},${r1(c1y)} ${x2 - WAVE_STEP / 3},${r1(c2y)} ${x2},${r1(y2)}`;
   }
-  return `${d} L${WAVE_WIDTH},${WAVE_HEIGHT} L0,${WAVE_HEIGHT} Z`;
+  return d;
 };
+
+// Organic tiling wave line: a few sine harmonics summed with per-layer
+// phases. Rendered as a stroke, not a fill — with nine overlapping bands,
+// filled regions compound into a solid wash; thin lines don't.
+const wavePath = ({ baseline, amp, harmonics }) => {
+  const y = (x) =>
+    baseline +
+    amp *
+      harmonics.reduce(
+        (sum, [k, a, p]) => sum + a * Math.sin((2 * Math.PI * k * x) / WAVE_LOOP + p),
+        0
+      );
+  return sampleSmoothPath(y);
+};
+
+// A single fine, mostly-straight strand with a gentle two-harmonic drift —
+// an open stroke, not filled.
+const hairlinePath = (baseline, amp, phase) => {
+  const y = (x) =>
+    baseline +
+    amp * Math.sin((2 * Math.PI * x) / WAVE_WIDTH + phase) +
+    amp * 0.35 * Math.sin((2 * Math.PI * 2.3 * x) / WAVE_WIDTH + phase * 1.7);
+  return sampleSmoothPath(y);
+};
+
+const HAIRLINE_HEIGHT = 900;
+const HAIRLINE_COUNT = 55;
+const AMBIENT_HAIRLINES = Array.from({ length: HAIRLINE_COUNT }, (_, i) => ({
+  baseline: 20 + i * ((HAIRLINE_HEIGHT - 40) / HAIRLINE_COUNT) + (hash(i * 2.3) - 0.5) * 16,
+  amp: 8 + hash(i * 5.1) * 18,
+  phase: hash(i * 8.7) * Math.PI * 2,
+  opacity: 0.015 + hash(i * 3.9) * 0.035,
+}));
 
 // Layers cover the whole viewport, but spacing, height, shape, speed, and
 // opacity are all deliberately jittered so nothing lines up too neatly.
@@ -85,10 +116,30 @@ const AppContent = ({ darkMode, toggleTheme }) => {
             }}
           >
             <svg viewBox={`0 0 ${WAVE_WIDTH} ${WAVE_HEIGHT}`} preserveAspectRatio="none">
-              <path fill="var(--brand)" d={wavePath(wave)} />
+              <path fill="none" stroke="var(--brand)" strokeWidth="2.5" d={wavePath(wave)} />
             </svg>
           </div>
         ))}
+
+        <div className="ambient-hairlines">
+          <svg
+            viewBox={`0 0 ${WAVE_WIDTH} ${HAIRLINE_HEIGHT}`}
+            preserveAspectRatio="none"
+            width="100%"
+            height="100%"
+          >
+            {AMBIENT_HAIRLINES.map((line, i) => (
+              <path
+                key={i}
+                d={hairlinePath(line.baseline, line.amp, line.phase)}
+                fill="none"
+                stroke="var(--brand)"
+                strokeWidth="1.4"
+                strokeOpacity={line.opacity}
+              />
+            ))}
+          </svg>
+        </div>
       </div>
       <Navbar toggleTheme={toggleTheme} darkMode={darkMode} />
       <main className="app-main">
